@@ -30,7 +30,7 @@ class ControllerJson
     public function quote(): Response
     {
         $number = random_int(0, 2);
-        date_default_timezone_set("Europe/Stockholm"); 
+        date_default_timezone_set("Europe/Stockholm");
 
         $val1 = "Shovel down your bland rations. Drink your coffee flavored sludge. It sucks but that is being human. - O´Keefe";
         $val2 = ".... - Link";

@@ -1,12 +1,10 @@
 body {
+    max-width: 80%;
     margin: 0 auto;
-    max-width: 400px;
     background-color: skyblue;
     background-size: cover;
     display: flex;
     flex-direction: column;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
 }
 
 img,
@@ -26,8 +24,6 @@ header {
 container {
     display: flex;
     flex-direction: column;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
     background-color: grey;
     column-rule-style: solid;
     column-rule-width: 3px;
@@ -66,4 +62,28 @@ footer {
     background: linear-gradient(to bottom, #666, #000);
     color: #FFF;
     padding: 0 1em;
+}
+
+.flash-notice {
+    padding: 0.5em;
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+.flash-notice:before {
+    content: "ⓘ";
+}
+
+.flash-warning {
+    padding: 0.5em;
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+.flash-warning:before {
+    content: "⚠";
+}
+
+.hand {
+    font-size: 300%;
 }
