@@ -8,15 +8,15 @@
 <p>Card games are a classic.</p>
 {% for i in range(0, suits|length-1) %}
     {% if suits[i] == "hearts" %}
-        <p class="hand">[&#9829;{{ vals[i] }}]</p>
+        <div class="hand">[&#9829;{{ vals[i] }}]</div>
     {% elseif suits[i] == "spades" %}
-        <p class="hand">[&spadesuit;{{ vals[i] }}]</p>
+        <div class="hand">[&spadesuit;{{ vals[i] }}]</div>
     {% elseif suits[i] == "diamonds" %}
-        <p class="hand">[&diamondsuit;{{ vals[i] }}]</p>
+        <div class="hand">[&diamondsuit;{{ vals[i] }}]</div>
     {% elseif suits[i] == "clubs" %}
-        <p class="hand">[&clubs;{{ vals[i] }}]</p>
+        <div class="hand">[&clubs;{{ vals[i] }}]</div>
     {% elseif suits[i] == "joker" %}
-    <p class="hand">[&#x1F0CF;{{ vals[i] }}]</p>
+        <div class="hand">[&#x1F0CF;{{ vals[i] }}]</div>
     {% endif %}
 {% endfor %}
 

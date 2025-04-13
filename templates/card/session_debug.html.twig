@@ -5,19 +5,12 @@
 {% block body %}
 <h1>Debug</h1>
 <p><a href="{{ path('card_start') }}">Cards</a></p>
-<p class="hand">{{ hand }}</p>
-<p class="hand">[{{ testcard }}]</p>
-<p class="hand">[{{ val }}]</p>
-<p class="hand">[{{ suit }}]</p>
-<p class="hand">[{{ color }}{{ val }}]</p>
-{% if suit == "hearts" %}
-    <p class="hand">[&#9829;{{ val }}]</p>
-{% elseif suit == "spades" %}
-    <p class="hand">[&spadesuit;{{ val }}]</p>
-{% elseif suit == "diamonds" %}
-    <p class="hand">[&diamondsuit;{{ val }}]</p>
-{% elseif suit == "clubs" %}
-    <p class="hand">[&clubs;{{ val }}]</p>
-{% endif %}
-{{ decktest1 }}
+
+<p>{{ hand }}</p>
+<p>{{ deck }}</p>
+<ul>
+{% for card in cards %}
+    <li>{{ card }}</li>
+{% endfor %}
+</ul>
 {% endblock %}

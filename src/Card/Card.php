@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Card;
 
 class Card
@@ -9,29 +10,29 @@ class Card
     {
         $this->value = null;
         $dict = [
-            0=>"A",
-            1=>"2",
-            2=>"3",
-            3=>"4",
-            4=>"5",
-            5=>"6",
-            6=>"7",
-            7=>"8",
-            8=>"9",
-            9=>"10",
-            10=>"jack",
-            11=>"queen",
-            12=>"king",
-            13=>"joker"
+            0 => "A",
+            1 => "2",
+            2 => "3",
+            3 => "4",
+            4 => "5",
+            5 => "6",
+            6 => "7",
+            7 => "8",
+            8 => "9",
+            9 => "10",
+            10 => "jack",
+            11 => "queen",
+            12 => "king",
+            13 => "joker"
         ];
         $this->kingdom = $dict;
         $this->suit = null;
         $this->color = [
-            "hearts"=>"&#9829;",
-            "spades"=>"&spadesuit;",
-            "clubs"=>"&clubs",
-            "diamonds"=>"&diamondsuit;",
-            "joker"=>"&#x1F0CF;"
+            "hearts" => "&#9829;",
+            "spades" => "&spadesuit;",
+            "clubs" => "&clubs",
+            "diamonds" => "&diamondsuit;",
+            "joker" => "&#x1F0CF;"
         ];
     }
 
@@ -40,6 +41,28 @@ class Card
         $this->value = $val;
         $this->suit = $suit;
         return "$this->value and $this->suit";
+    }
+
+    public function valFromKingdom($role, $faction): void
+    {
+        $dict = [
+            "A" => 0,
+            "2" => 1,
+            "3" => 2,
+            "4" => 3,
+            "5" => 4,
+            "6" => 5,
+            "7" => 6,
+            "8" => 7,
+            "9" => 8,
+            "10" => 9,
+            "jack" => 10,
+            "queen" => 11,
+            "king" => 12,
+            "joker" => 13
+        ];
+        $val = $dict[$role];
+        $this->setValue($val, $faction);
     }
 
     public function getValue(): int
