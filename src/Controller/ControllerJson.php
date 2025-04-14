@@ -14,7 +14,9 @@ class ControllerJson
         $data = [
             '/api/lucky/number' => 'Shows a random number between 0 and 100',
             '/api/quote' => 'Shows one of three random quotes and the date and time for when it was generated',
-
+            '/api/draw' => 'Shows all cards in deck in order',
+            '/api/deck/shuffle' => 'Shuffles deck and stores in session',
+            '/api/deck/draw' => 'Draw one or more cards, deck is stored in session'
         ];
         $response = new JsonResponse($data);
         $response->setEncodingOptions(

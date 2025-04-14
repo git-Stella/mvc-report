@@ -16,8 +16,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CardControllerJson extends AbstractController
 {
-    #[Route("/api/deck", methods: ['GET'])]
-    public function apiDeck(): Response {
+    #[Route("/api/deck", name: "card_api_deck", methods: ['GET'])]
+    public function apiDeck(): Response
+    {
         $deck = new DeckOfJokers();
         $cardArray = [];
         foreach ($deck->deck as $card) {
@@ -35,7 +36,8 @@ class CardControllerJson extends AbstractController
         return $response;
     }
     #[Route("/api/deck/shuffle", name: "card_api_shuffle", methods: ['GET'])]
-    public function apiShuff(): Response {
+    public function apiShuff(): Response
+    {
         return $this->render('card/api_shuffle.html.twig');
     }
     #[Route("/api/deck/shuffle", name: "card_json_shuffle", methods: ['POST'])]
@@ -63,7 +65,8 @@ class CardControllerJson extends AbstractController
         return $response;
     }
     #[Route("/api/deck/draw", name: "card_api_draw", methods: ['GET'])]
-    public function apiDraw(): Response {
+    public function apiDraw(): Response
+    {
         return $this->render('card/api_draw.html.twig');
     }
     #[Route("/api/deck/draw", name: "card_json_draw", methods: ['POST'])]
@@ -74,7 +77,7 @@ class CardControllerJson extends AbstractController
         if (null !== $session->get("deckArray")) {
             $cardArray = $session->get("deckArray");
         } else {
-            $deck= new DeckOfJokers();
+            $deck = new DeckOfJokers();
             $cardArray = [];
             foreach ($deck->deck as $card) {
                 $suit = $card->getColor();
@@ -95,17 +98,22 @@ class CardControllerJson extends AbstractController
         );
         return $response;
     }
-    #[Route("/api/deck/draw/many", name: "card_json_draw_num", methods: ['POST'])]
-    public function apiDrawCards(
-        Request $request,
-        SessionInterface $session
+    #[Route("/api/deck/draw/middle", name: "card_json_middle", methods: ['POST'])]
+    public function apiMiddle(
+        Request $request
     ): Response {
         $num = $request->request->get('num');
+    }
+    #[Route("/api/deck/draw/{num<\d+>}", name: "card_json_draw_num", methods: ['POST'])]
+    public function apiDrawCards(
+        int $num,
+        SessionInterface $session
+    ): Response {
         $removedList = $session->get("cards", []);
         if (null !== $session->get("deckArray")) {
             $cardArray = $session->get("deckArray");
         } else {
-            $deck= new DeckOfJokers();
+            $deck = new DeckOfJokers();
             $cardArray = [];
             foreach ($deck->deck as $card) {
                 $suit = $card->getColor();

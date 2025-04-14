@@ -5,13 +5,23 @@
 {% block body %}
 <h1>Draw</h1>
 
-<form method="post" action="">
-    <input type="number" name="num" min="1" max="10" value="1">
-    <input type="submit" name="draw" value="Draw" 
-    onClick="this.form.action='{{ path('card_json_draw_num') }}';">
-</form>
+<ul>
+    <li><a href="{{ path('card_api_deck') }}">Deck</a></li>
+    <li><a href="{{ path('card_api_shuffle') }}">Shuffle</a></li>
+    <li><a href="{{ path('card_api_draw') }}">Draw</a></li>
+</ul>
+
 <form method="post">
     <input type="submit" value="Draw 1">
+</form>
+<form method="post" action="{{ path('card_json_draw_num', {num: 3}) }}">
+    <input type="submit" name="draw" value="Draw 3">
+</form>
+<form method="post" action="{{ path('card_json_draw_num', {num: 5}) }}">
+    <input type="submit" name="draw" value="Draw 5">
+</form>
+<form method="post" action="{{ path('card_json_draw_num', {num: 10}) }}">
+    <input type="submit" name="draw" value="Draw 10">
 </form>
 
 {% endblock %}

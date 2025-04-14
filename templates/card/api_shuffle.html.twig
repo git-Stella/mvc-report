@@ -5,6 +5,12 @@
 {% block body %}
 <h1>Shuffle</h1>
 
+<ul>
+    <li><a href="{{ path('card_api_deck') }}">Deck</a></li>
+    <li><a href="{{ path('card_api_shuffle') }}">Shuffle</a></li>
+    <li><a href="{{ path('card_api_draw') }}">Draw</a></li>
+</ul>
+
  <form method="post">
   <input type="submit" value="Shuffle">
 </form> 
