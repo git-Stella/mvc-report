@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card Game{% endblock %}
+
+{% block body %}
+<h1>Draw</h1>
+
+<form method="post" action="">
+    <input type="number" name="num" min="1" max="10" value="1" 
+    onClick="this.form.action='{{ path('card_json_draw_num', num) }}';">
+    <input type="submit" name="draw" value="Draw">
+</form>
+<form method="post">
+    <input type="submit" value="Draw 1">
+</form> 
+
+{% endblock %}

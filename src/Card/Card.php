@@ -4,8 +4,7 @@ namespace App\Card;
 
 class Card
 {
-    protected $value;
-
+    //protected $value;
     public function __construct()
     {
         $this->value = null;
@@ -28,11 +27,11 @@ class Card
         $this->kingdom = $dict;
         $this->suit = null;
         $this->color = [
-            "hearts" => "&#9829;",
-            "spades" => "&spadesuit;",
-            "clubs" => "&clubs",
-            "diamonds" => "&diamondsuit;",
-            "joker" => "&#x1F0CF;"
+            "hearts" => "♥",
+            "spades" => "♠",
+            "clubs" => "♣",
+            "diamonds" => "♦",
+            "joker" => "🃏︎"
         ];
     }
 
