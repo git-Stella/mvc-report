@@ -73,7 +73,7 @@ class CardControllerJson extends AbstractController
     public function apiDrawCard(
         SessionInterface $session
     ): Response {
-        $removedList = $session->get("cards", []);
+        //$removedList = $session->get("cards", []);
         if (null !== $session->get("deckArray")) {
             $cardArray = $session->get("deckArray");
         } else {
@@ -109,7 +109,7 @@ class CardControllerJson extends AbstractController
         int $num,
         SessionInterface $session
     ): Response {
-        $removedList = $session->get("cards", []);
+        //$removedList = $session->get("cards", []);
         if (null !== $session->get("deckArray")) {
             $cardArray = $session->get("deckArray");
         } else {

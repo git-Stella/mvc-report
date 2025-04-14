@@ -52,6 +52,7 @@ class CardGameController extends AbstractController
         //I need removed cards and cards left...
         //I need the current deck order too...
         $data = [
+            "decklist" => $session->get("deckArray"),
             "hand" => $session->get("hand", "empty"),
             "deck" => $session->get("deck", "empty"),
             "cards" => $session->get("cards", "empty")

@@ -17,5 +17,16 @@
     <li><a href="{{ path('card_draw_num', {num: 5}) }}">Draw 5</a></li>
 </ul>
 
+<h1>Klassstruktur</h1>
+<p>
+    Jag har en Card klass som representerar korten i kortleken. Dessa har olika 
+    funktioner för att göra det lättare att visa upp dem på olika sätt. 
+    Den har en aggregerande relation till DeckOfCards, som innehåller en "deck" vilket är en 
+    array av Card objekt. Jag har även en DeckOfJokers klass som ärver av DeckOfCards men har en 
+    annorlunda constructor så att det finns med jokrar i kortleken också. Vilket mina Card objekt 
+    redan hade support för inbyggt. Jag valde att bara ha en card klass och att ge den klassen mer 
+    alternativ för att ha mer flexibilitet i hur mina kortlekar nyttjade sig av dem. 
+</p>
+<img src="{{ asset('img/umlcards.jpg') }}" alt="classdiagram">
 
 {% endblock %}
