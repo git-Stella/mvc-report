@@ -15,7 +15,31 @@
     Denna listar bland annat folk som skriver om php och olika verktyg du kan ha nytta av, vilket är något som man skulle kunna ha stor nytta av själv framöver. 
     TIL mest hur formatering är med objekt i php. Utöver det så har jag mest försökt förstå mig på hur symfony är uppbyggt.</p>
     <h1 id="kmom02">Kmom02</h1>
-    <p>Here goes text</p>
+    <h2>Förklara kort de objektorienterade konstruktionerna arv, komposition, interface och trait och hur de används i PHP.</h2>
+    <p>Arv är ganska simpelt. Det har med att en klass kan "ärva" egenskaper av en annan klass som den "extendar". Detta har fördelen att man kan undvikda 
+    att göra om samma funktioner och egenskaper till väldigt snarlika klasser. Eller för att kunna specialisera till lite annorlunda varianter av samma klass. 
+    Ofta så vill man kunna återanvända funktioner från en klass inom en annan, då fungerar arv bra att ta nytta av för detta syfte. 
+    Komposition, väldigt likt så kallad aggregation, innebär att en klass används inom en annan klass. Skyllnaden mellan dessa är att komposition så kan det inte 
+    existera på egen hand medans med aggregation så kan klassen existera utan sin "förälder". 
+    En interface är ett sätt att kunna formatera funktioner som fungerar på ett visst sätt med en viss typ av inmatning och viss typ av utskrift. Tillexempel att 
+    denna funktionen får en variable av typen string inmatad och den kommer att skicka tillbaka en string. Eller void, eller något annat. Jag använder mig av interface 
+    i nästan alla funktioner inom klasserna jag har gjort. 
+    Trait har att göra med att kunna återanvända funktioner oberoende av klasser. Till exempel i våran kod har vi våra public functions i våra controllers. 
+    Dessa funktioner kan då kallas på oberoende av klass och är ett sätt att kunna återanvända liknande kod delar utan att behöva använda sig av arv. </p>
+    <h2>Berätta om din implementation från uppgiften. Hur löste du uppgiften, är du nöjd/missnöjd, vilken förbättringspotential ser du i din koden och dina klasser?</h2>
+    <p>Jag valde att använda mig av arv via att ha separata kortlekar för en med och en utan jokrar. Använde jokrar i JSON API och inte på de vanliga html sidorna. 
+    Jag tror att jag gjorde mina Card mycket mer komplicerade än vad jag behövde, tog mig lång tid innan jag insåg att jag bara kunde kopiera in utf tecknen för 
+    varje färg in i min kod och inte behövde konvertera strings av färgen till utf-8 koden för varje symbol. Därmed nyttjar jag bara det enklare sättet i mina API sidor då 
+    jag gjorde dem sist. Jag hade även problem med att få min api/deck/draw/number att bli som jag ville. Försökte få formuläret att kunna ändra på vad för number det blev. 
+    Men till slut gav jag upp på det och valde att bara ha specifika val som skickade in olika värden med hur många kort som skulle dras. Mina sidor att visa upp hela kortleken 
+    interagerar inte med sessionen då det verkade inte lägga till något. Jag valde att bara återställa det via shuffle eller reset. Jag har även en del ställen där jag skriver samma kod igen 
+    som jag gärna kunnat göra om till funktioner för att få mer DRY kod ser jag.</p>
+    <h2>Vilka är dina reflektioner så här långt med att jobb i Symfony med applikationskod enligt MVC?</h2>
+    <p>Symfony känner jag att jag börjat få ganska bra förståelse för nu ändå. Att allting bryts upp i det tre delarna med klasserna för M, vyerna för V och våra controllers C gör det lättare att 
+    leta reda på olika delar av koden. Jag gillar att ha det nedbrytet och organiserat på så här sätt.</p>
+    <h2>Vilken är din TIL för detta kmom?</h2>
+    <p>Känner att jag har bättre koll på hur arv fungerar och hur man kan använda klasser relativt till varandra än tidigare. Sen visste jag inte om hur man kunde göra speciella tecken 
+    i vanlig html kod.</p>
     <h1 id="kmom03">Kmom03</h1>
     <p>Here goes text</p>
     <h1 id="kmom04">Kmom04</h1>
