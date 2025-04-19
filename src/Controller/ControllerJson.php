@@ -12,11 +12,17 @@ class ControllerJson
     public function apiLanding(): Response
     {
         $data = [
-            '/api/lucky/number' => 'Shows a random number between 0 and 100',
-            '/api/quote' => 'Shows one of three random quotes and the date and time for when it was generated',
-            '/api/draw' => 'Shows all cards in deck in order',
-            '/api/deck/shuffle' => 'Shuffles deck and stores in session',
-            '/api/deck/draw' => 'Draw one or more cards, deck is stored in session'
+            '/api/lucky/number' => 'Shows a random number between 0 and 100 
+            https://www.student.bth.se/~anka21/dbwebb-kurser/mvc/me/report/public/api/lucky/number',
+            '/api/quote' => 'Shows one of three random quotes and the date and time for when it was generated 
+            https://www.student.bth.se/~anka21/dbwebb-kurser/mvc/me/report/public/api/quote',
+            '/api/deck' => 'Shows all cards in deck in order 
+            https://www.student.bth.se/~anka21/dbwebb-kurser/mvc/me/report/public/api/deck',
+            '/api/deck/shuffle' => 'Shuffles deck and stores in session 
+            https://www.student.bth.se/~anka21/dbwebb-kurser/mvc/me/report/public/api/deck/shuffle',
+            '/api/deck/draw' => 'Draw one or more cards, deck is stored in session 
+            https://www.student.bth.se/~anka21/dbwebb-kurser/mvc/me/report/public/api/deck/draw',
+            'Hey' => 'https://www.student.bth.se/~anka21/dbwebb-kurser/mvc/me/report/public'
         ];
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
