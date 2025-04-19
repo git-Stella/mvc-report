@@ -1,23 +1,17 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Debug{% endblock %}
+{% block title %}Draw{% endblock %}
 
 {% block body %}
 <h1>Draw</h1>
 <p><a href="{{ path('card_start') }}">Cards</a></p>
 <p><a href="{{ path('card_shuffle') }}">Shuffle</a></p>
-{{ numleft }}
-{% for i in range(0, suits|length-1) %}
-    {% if suits[i] == "hearts" %}
-        <p class="hand">[&#9829;{{ vals[i] }}]</p>
-    {% elseif suits[i] == "spades" %}
-        <p class="hand">[&spadesuit;{{ vals[i] }}]</p>
-    {% elseif suits[i] == "diamonds" %}
-        <p class="hand">[&diamondsuit;{{ vals[i] }}]</p>
-    {% elseif suits[i] == "clubs" %}
-        <p class="hand">[&clubs;{{ vals[i] }}]</p>
-    {% elseif suits[i] == "joker" %}
-    <p class="hand">[&#x1F0CF;{{ vals[i] }}]</p>
-    {% endif %}
-{% endfor %}
+<p><a href="{{ path('card_draw') }}">Draw</a></p>
+<p><a href="{{ path('card_draw_num', {num: 5}) }}">Draw 5</a></p>
+{{ deck }}
+<p class="hand">
+    {% for i in range(0, cards|length-1) %}
+        {{ cards[i] }}
+    {% endfor %}
+</p>
 {% endblock %}

@@ -27,10 +27,10 @@ class Card
         $this->kingdom = $dict;
         $this->suit = null;
         $this->color = [
-            "hearts" => "♥",
-            "spades" => "♠",
-            "clubs" => "♣",
-            "diamonds" => "♦",
+            "hearts" => "♥️",
+            "spades" => "♠️",
+            "clubs" => "♣️",
+            "diamonds" => "♦️",
             "joker" => "🃏︎"
         ];
     }

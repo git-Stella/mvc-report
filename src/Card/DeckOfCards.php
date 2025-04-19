@@ -59,6 +59,17 @@ class DeckOfCards
         return count($this->deck);
     }
 
+    public function returnDeck(): array
+    {
+        $cardArray = [];
+        foreach ($this->deck as $card) {
+            $suit = $card->getColor();
+            $val = $card->getKingdom();
+            $cardArray[] = '[' . $suit . $val . ']';
+        }
+        return $cardArray;
+    }
+
     public function getValues(): array
     {
         //$values = [];

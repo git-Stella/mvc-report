@@ -6,14 +6,11 @@
 <h1>Debug</h1>
 <p><a href="{{ path('card_start') }}">Cards</a></p>
 
-<p>{{ hand }}</p>
 <p>{{ deck }}</p>
-<ul>
-{% for card in cards %}
-    <li>{{ card }}</li>
-{% endfor %}
-{% for card in decklist %}
-    <li>{{ card }}</li>
-{% endfor %}
-</ul>
+<p class="hand">
+    {% for i in range(0, decklist|length-1) %}
+        {{ decklist[i] }}
+    {% endfor %}
+</p>
+
 {% endblock %}

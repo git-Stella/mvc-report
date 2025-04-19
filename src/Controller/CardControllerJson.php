@@ -55,6 +55,7 @@ class CardControllerJson extends AbstractController
         }
         shuffle($cardArray);
         $session->set("deckArray", $cardArray);
+        $session->set("deck", 54);
         $data = [
             'deck' => $cardArray
         ];
@@ -88,6 +89,7 @@ class CardControllerJson extends AbstractController
         $amount = count($cardArray) - 1;
         $drawnCard = array_pop($cardArray);
         $session->set("deckArray", $cardArray);
+        $session->set("deck", $amount);
         $data = [
             "deck" => $amount,
             "card" => $drawnCard
@@ -128,6 +130,7 @@ class CardControllerJson extends AbstractController
         }
         //$drawnCard = array_pop($cardArray);
         $session->set("deckArray", $cardArray);
+        $session->set("deck", $amount);
         $data = [
             "deck" => $amount,
             "cards" => $drawnCards

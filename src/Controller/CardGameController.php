@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Card\Card;
 //use App\Card\CardGraphic;
 use App\Card\DeckOfCards;
-//use App\Card\DeckOfJokers;
+use App\Card\DeckOfJokers;
 //use App\Dice\DiceHand;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -20,28 +20,24 @@ class CardGameController extends AbstractController
     public function home(
         SessionInterface $session
     ): Response {
-        $deck = new DeckOfCards();
+        $deck = new DeckOfJokers();
         //add session played later and use that to figure out what is in hand and on field...
         //for later kmom
         if (null !== $session->get("deck")) {
             $session->get("deck");
         } else {
-            $session->set("deck", $deck->getNumberCards());
+            $session->set("deck", 54);
         }
-        if (null !== $session->get("hand")) {
-            $session->get("hand");
+        if (null !== $session->get("deckArray")) {
+            $session->get("deckArray");
         } else {
-            $session->set("hand", 0);
-        }
-        if (null !== $session->get("cards")) {
-            $session->get("cards");
-        } else {
-            $session->set("cards", []);
-        }
-        if (null !== $session->get("order")) {
-            $session->get("order");
-        } else {
-            $session->set("order", $deck->getValues());
+            $cardArray = [];
+            foreach ($deck->deck as $card) {
+                $suit = $card->getColor();
+                $val = $card->getKingdom();
+                $cardArray[] = '[' . $suit . $val . ']';
+            }
+            $session->set("deckArray", $cardArray);
         }
         return $this->render('card/home.html.twig');
     }
@@ -52,10 +48,8 @@ class CardGameController extends AbstractController
         //I need removed cards and cards left...
         //I need the current deck order too...
         $data = [
-            "decklist" => $session->get("deckArray"),
-            "hand" => $session->get("hand", "empty"),
-            "deck" => $session->get("deck", "empty"),
-            "cards" => $session->get("cards", "empty")
+            "decklist" => $session->get("deckArray", ["empty"]),
+            "deck" => $session->get("deck", 0)
             //"decktest2" => $session->get("decktest2", "empty")
         ];
         return $this->render('card/session_debug.html.twig', $data);
@@ -75,12 +69,18 @@ class CardGameController extends AbstractController
     public function deck(
         //SessionInterface $session
     ): Response {
-        $deck = new DeckOfCards();
-        $toSplit = $deck->getValues();
-        $split1 = [];
-        $split2 = [];
+        $deck = new DeckOfJokers();
+        //$toSplit = $deck->getValues();
+        //$split1 = [];
+        //$split2 = [];
         //$splitted = [[][]];
-        foreach ($toSplit as $splitter) {
+        $cardArray = [];
+        foreach ($deck->deck as $card) {
+            $suit = $card->getColor();
+            $val = $card->getKingdom();
+            $cardArray[] = '[' . $suit . $val . ']';
+        }
+        /*foreach ($toSplit as $splitter) {
             $split = explode("-", $splitter);
             $split1[] = $split[0];
             $split2[] = $split[1];
@@ -91,6 +91,10 @@ class CardGameController extends AbstractController
         $data = [
             "suits" => $suits,
             "vals" => $vals
+        ];*/
+        $data = [
+            "deck" => $cardArray,
+            "num" => 54
         ];
         return $this->render('card/deck.html.twig', $data);
     }
@@ -100,19 +104,25 @@ class CardGameController extends AbstractController
         SessionInterface $session
     ): Response {
         $session->clear();
-        $deck = new DeckOfCards();
+        $deck = new DeckOfJokers();
         //$shuffleArray = array();
         //$toShuffle = $deck->deck;
-        $split1 = [];
-        $split2 = [];
+        //$split1 = [];
+        //$split2 = [];
         //$toShuffle = $deck->getValues();
         //srand();
-        $deck->shuffle_deck();
-        $shuffled = $deck->getValues();
+        $cardArray = [];
+        foreach ($deck->deck as $card) {
+            $suit = $card->getColor();
+            $val = $card->getKingdom();
+            $cardArray[] = '[' . $suit . $val . ']';
+        }
+        shuffle($cardArray);
+        //$shuffled = $deck->getValues();
 
-        $session->set("cards", []);
-        $session->set("order", $shuffled);
-        foreach ($shuffled as $splitter) {
+        //$session->set("cards", []);
+        //$session->set("order", $shuffled);
+        /*foreach ($shuffled as $splitter) {
             $split = explode("-", $splitter);
             $split1[] = $split[0];
             $split2[] = $split[1];
@@ -122,6 +132,12 @@ class CardGameController extends AbstractController
         $data = [
             "suits" => $suits,
             "vals" => $vals
+        ];*/
+        $session->set("deckArray", $cardArray);
+        $session->set("deck", 54);
+        $data = [
+            "deck" => $cardArray,
+            "num" => $session->get("deck", 0)
         ];
         return $this->render('card/deck.html.twig', $data);
     }
@@ -129,41 +145,31 @@ class CardGameController extends AbstractController
     public function deck_draw(
         SessionInterface $session
     ): Response {
-        $removedList = $session->get("cards", []);
-        $deck = new DeckOfCards();
-        if (null !== $session->get("order")) {
-            $deck->swap_shuffle($session->get("order"));
-        }
-        if (null !== $session->get("cards")) {
-            foreach ($removedList as $card) {
-                $deck->remove($card);
+        //$removedList = $session->get("cards", []);
+        if (null !== $session->get("deckArray")) {
+            $cardArray = $session->get("deckArray");
+        } else {
+            $deck = new DeckOfJokers();
+            $cardArray = [];
+            foreach ($deck->deck as $card) {
+                $suit = $card->getColor();
+                $val = $card->getKingdom();
+                $cardArray[] = '[' . $suit . $val . ']';
             }
         }
-        if (1 > $session->get("deck", 0)) {
-            throw new \Exception("Can not draw more cards then exist!");
-        }
-        $cardsLeft = $session->get("deck", 1) - 1;
-        $session->set("deck", $cardsLeft);
-        //set session after pop
-        $toSplit = $deck->getValues();
-        $split1 = [];
-        $split2 = [];
-        //$splitted = [[][]];
-        foreach ($toSplit as $splitter) {
-            $split = explode("-", $splitter);
-            $split1[] = $split[0];
-            $split2[] = $split[1];
-        }
-        $cardVal = array_pop($split1);
-        $cardSuit = array_pop($split2);
-        $cardRemoved = $cardVal . "-" . $cardSuit;
-        $removedList[] = $cardRemoved;
-        $session->set("cards", $removedList);
+        $amount = count($cardArray) - 1;
+        $drawnCard = array_pop($cardArray);
+        $session->set("deckArray", $cardArray);
+        $session->set("deck", $amount);
         $data = [
-            "numleft" => $cardsLeft,
-            "suit" => $cardSuit,
-            "val" => $cardVal
+            "deck" => $amount,
+            "card" => $drawnCard
         ];
+        //$cardVal = array_pop($split1);
+        //$cardSuit = array_pop($split2);
+        //$cardRemoved = $cardVal . "-" . $cardSuit;
+        //$removedList[] = $cardRemoved;
+        //$session->set("cards", $removedList);
         return $this->render('card/draw.html.twig', $data);
     }
     #[Route("/card/deck/draw/{num<\d+>}", name: "card_draw_num")]
@@ -171,46 +177,29 @@ class CardGameController extends AbstractController
         int $num,
         SessionInterface $session
     ): Response {
-        $removedList = $session->get("cards", []);
-        $deck = new DeckOfCards();
-        if (null !== $session->get("order")) {
-            $deck->swap_shuffle($session->get("order"));
-        }
-        if (null !== $session->get("cards")) {
-            foreach ($removedList as $card) {
-                $deck->remove($card);
+        //$removedList = $session->get("cards", []);
+        if (null !== $session->get("deckArray")) {
+            $cardArray = $session->get("deckArray");
+        } else {
+            $deck = new DeckOfJokers();
+            $cardArray = [];
+            foreach ($deck->deck as $card) {
+                $suit = $card->getColor();
+                $val = $card->getKingdom();
+                $cardArray[] = '[' . $suit . $val . ']';
             }
         }
-        if ($num > $session->get("deck", 0)) {
-            throw new \Exception("Can not draw more cards then exist!");
-        }
-        $cardsLeft = $session->get("deck", 1) - $num;
-        $session->set("deck", $cardsLeft);
-        //set session after pop
-        $toSplit = $deck->getValues();
-        $split1 = [];
-        $split2 = [];
-        //$splitted = [[][]];
-        foreach ($toSplit as $splitter) {
-            $split = explode("-", $splitter);
-            $split1[] = $split[0];
-            $split2[] = $split[1];
-        }
-        $cardVal = [];
-        $cardSuit = [];
+        $amount = count($cardArray) - $num;
+        $drawnCards = [];
         for ($i = 1; $i <= $num; $i++) {
-            $cVal = array_pop($split1);
-            $cSuit = array_pop($split2);
-            $cardVal[] = $cVal;
-            $cardSuit[] = $cSuit;
-            $cardRemoved = $cVal . "-" . $cSuit;
-            $removedList[] = $cardRemoved;
+            $drawnCards[] = array_pop($cardArray);
         }
-        $session->set("cards", $removedList);
+        //$drawnCard = array_pop($cardArray);
+        $session->set("deckArray", $cardArray);
+        $session->set("deck", $amount);
         $data = [
-            "numleft" => $cardsLeft,
-            "suits" => $cardSuit,
-            "vals" => $cardVal
+            "deck" => $amount,
+            "cards" => $drawnCards
         ];
         return $this->render('card/draw_many.html.twig', $data);
     }

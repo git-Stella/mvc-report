@@ -6,18 +6,12 @@
 <h1>Card game</h1>
 
 <p>Card games are a classic.</p>
-{% for i in range(0, suits|length-1) %}
-    {% if suits[i] == "hearts" %}
-        <div class="hand">[&#9829;{{ vals[i] }}]</div>
-    {% elseif suits[i] == "spades" %}
-        <div class="hand">[&spadesuit;{{ vals[i] }}]</div>
-    {% elseif suits[i] == "diamonds" %}
-        <div class="hand">[&diamondsuit;{{ vals[i] }}]</div>
-    {% elseif suits[i] == "clubs" %}
-        <div class="hand">[&clubs;{{ vals[i] }}]</div>
-    {% elseif suits[i] == "joker" %}
-        <div class="hand">[&#x1F0CF;{{ vals[i] }}]</div>
-    {% endif %}
+<p><a href="{{ path('card_start') }}">Cards</a></p>
+<p>{{ num }}</p>
+<p class="hand">
+{% for i in range(0, deck|length-1) %}
+    {{ deck[i] }}
 {% endfor %}
+</p>
 
 {% endblock %}

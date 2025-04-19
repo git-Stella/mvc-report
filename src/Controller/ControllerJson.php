@@ -24,7 +24,7 @@ class ControllerJson
         );
         return $response;
     }
-    #[Route("/api/lucky/number")]
+    #[Route("/api/lucky/number", name: "api_luck_num")]
     public function jsonNumber(): Response
     {
         $number = random_int(0, 100);

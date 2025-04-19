@@ -27,10 +27,11 @@
     Trait har att göra med att kunna återanvända funktioner oberoende av klasser. Till exempel i våran kod har vi våra public functions i våra controllers. 
     Dessa funktioner kan då kallas på oberoende av klass och är ett sätt att kunna återanvända liknande kod delar utan att behöva använda sig av arv. </p>
     <h2>Berätta om din implementation från uppgiften. Hur löste du uppgiften, är du nöjd/missnöjd, vilken förbättringspotential ser du i din koden och dina klasser?</h2>
-    <p>Jag valde att använda mig av arv via att ha separata kortlekar för en med och en utan jokrar. Använde jokrar i JSON API och inte på de vanliga html sidorna. 
+    <p>Jag valde att använda mig av arv via att ha separata kortlekar för en med och en utan jokrar. 
     Jag tror att jag gjorde mina Card mycket mer komplicerade än vad jag behövde, tog mig lång tid innan jag insåg att jag bara kunde kopiera in utf tecknen för 
     varje färg in i min kod och inte behövde konvertera strings av färgen till utf-8 koden för varje symbol. Därmed nyttjar jag bara det enklare sättet i mina API sidor då 
-    jag gjorde dem sist. Jag hade även problem med att få min api/deck/draw/number att bli som jag ville. Försökte få formuläret att kunna ändra på vad för number det blev. 
+    jag gjorde dem sist. Tills jag var tvungen att göra om uppgiften då jag gick tillbaka och gjorde på det enklare sättet till att börja med. Jag hade även problem med att få min api/deck/draw/number att bli som jag ville. 
+    Försökte få formuläret att kunna ändra på vad för number det blev. 
     Men till slut gav jag upp på det och valde att bara ha specifika val som skickade in olika värden med hur många kort som skulle dras. Mina sidor att visa upp hela kortleken 
     interagerar inte med sessionen då det verkade inte lägga till något. Jag valde att bara återställa det via shuffle eller reset. Jag har även en del ställen där jag skriver samma kod igen 
     som jag gärna kunnat göra om till funktioner för att få mer DRY kod ser jag.</p>
