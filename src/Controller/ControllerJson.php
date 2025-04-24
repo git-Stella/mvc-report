@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ControllerJson
+class ControllerJson extends AbstractController
 {
-    #[Route("/api")]
+    #[Route("/api/api", name: "apiapi")]
     public function apiLanding(): Response
     {
         $data = [
@@ -29,6 +30,11 @@ class ControllerJson
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
         return $response;
+    }
+    #[Route("/api", name: "api")]
+    public function apiLand(): Response
+    {
+        return $this->render('api.html.twig');
     }
     #[Route("/api/lucky/number", name: "api_luck_num")]
     public function jsonNumber(): Response

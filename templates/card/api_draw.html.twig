@@ -5,12 +5,6 @@
 {% block body %}
 <h1>Draw</h1>
 
-<ul>
-    <li><a href="{{ path('card_api_deck') }}">Deck</a></li>
-    <li><a href="{{ path('card_api_shuffle') }}">Shuffle</a></li>
-    <li><a href="{{ path('card_api_draw') }}">Draw</a></li>
-</ul>
-
 <form method="post">
     <input type="submit" value="Draw 1">
 </form>
@@ -23,5 +17,11 @@
 <form method="post" action="{{ path('card_json_draw_num', {num: 10}) }}">
     <input type="submit" name="draw" value="Draw 10">
 </form>
+
+<ul>
+    <li><a href="{{ path('card_api_deck') }}">Deck</a></li>
+    <li><a href="{{ path('card_api_shuffle') }}">Shuffle</a></li>
+    <li><a href="{{ path('card_api_draw') }}">Draw</a></li>
+</ul>
 
 {% endblock %}
