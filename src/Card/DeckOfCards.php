@@ -6,7 +6,7 @@ use App\Card\Card;
 
 class DeckOfCards
 {
-    private $deck = [];
+    public $deck = [];
 
     public function __construct()
     {
@@ -21,20 +21,78 @@ class DeckOfCards
         }
     }
 
-    public function shuffle_deck(): void
+    public function shuffle(): void
     {
-        shuffle($this->deck);
+        $deckArray = $this->deck;
+        //print($deckArray[0]);
+        shuffle($deckArray);
+        //shuffle($this->deck);
+        $this->deck = $deckArray;
     }
 
-    public function swap_shuffle($deckArray): void
+    public function sort(): void
     {
-        $this->deck = [];
-        foreach ($deckArray as $cardStats) {
-            $split = explode("-", $cardStats);
-            $card = new Card();
-            $card->valFromKingdom($split[0], $split[1]);
-            $this->deck[] = $card;
+        $newDeck = [];
+        $hearts = [];
+        $diamonds = [];
+        $spades = [];
+        $clubs = [];
+        $joker = [];
+        foreach ($this->deck as $card) {
+            if ($card->getSuit() == "hearts") {
+                $hearts[] = $card;
+            }
+            if ($card->getSuit() == "diamonds") {
+                $diamonds[] = $card;
+            }
+            if ($card->getSuit() == "spades") {
+                $spades[] = $card;
+            }
+            if ($card->getSuit() == "clubs") {
+                $clubs[] = $card;
+            }
+            if ($card->getSuit() == "joker") {
+                $joker[] = $card;
+            }
         }
+        sort($hearts);
+        sort($diamonds);
+        sort($spades);
+        sort($clubs);
+        $suits = [
+            $hearts,
+            $diamonds,
+            $spades,
+            $clubs,
+            $joker
+        ];
+        foreach ($suits as $suit) {
+            foreach ($suit as $curSuit) {
+                $newDeck[] = $curSuit;
+            }
+        }
+        /*foreach ($hearts as $heart) {
+            $newDeck[] = $heart;
+        }
+        foreach ($diamonds as $diamond) {
+            $newDeck[] = $diamond;
+        }
+        foreach ($spades as $spade) {
+            $newDeck[] = $spade;
+        }
+        foreach ($clubs as $club) {
+            $newDeck[] = $club;
+        }
+        foreach ($joker as $joker) {
+            $newDeck[] = $joker;
+        }*/
+        $this->deck = $newDeck;
+        //sort($this->deck);
+    }
+
+    public function swapShuffle($deckArray): void
+    {
+        $this->deck = $deckArray;
     }
 
     public function add(Card $card): void

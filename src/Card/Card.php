@@ -4,7 +4,10 @@ namespace App\Card;
 
 class Card
 {
-    //protected $value;
+    public $value;
+    public $kingdom;
+    public $suit;
+    public $color;
     public function __construct()
     {
         $this->value = null;

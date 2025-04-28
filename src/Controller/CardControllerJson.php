@@ -17,9 +17,14 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class CardControllerJson extends AbstractController
 {
     #[Route("/api/deck", name: "card_api_deck", methods: ['GET'])]
-    public function apiDeck(): Response
-    {
+    public function apiDeck(
+        SessionInterface $session
+    ): Response {
         $deck = new DeckOfJokers();
+        $placehold = $session->get("deckArray", $deck->deck);
+        $deck->swapShuffle($placehold);
+        //look over sort and how to integrate session later...
+        $deck->sort();
         $cardArray = [];
         foreach ($deck->deck as $card) {
             $suit = $card->getColor();
@@ -47,15 +52,15 @@ class CardControllerJson extends AbstractController
         $session->clear();
         $deck = new DeckOfJokers();
         //$deck->shuffle_deck();
+        $deck->shuffle();
         $cardArray = [];
         foreach ($deck->deck as $card) {
             $suit = $card->getColor();
             $val = $card->getKingdom();
             $cardArray[] = '[' . $suit . $val . ']';
         }
-        shuffle($cardArray);
-        $session->set("deckArray", $cardArray);
-        $session->set("deck", 54);
+        $session->set("deckArray", $deck->deck);
+        $session->set("deck", count($cardArray));
         $data = [
             'deck' => $cardArray
         ];
@@ -75,20 +80,19 @@ class CardControllerJson extends AbstractController
         SessionInterface $session
     ): Response {
         //$removedList = $session->get("cards", []);
-        if (null !== $session->get("deckArray")) {
-            $cardArray = $session->get("deckArray");
-        } else {
-            $deck = new DeckOfJokers();
-            $cardArray = [];
-            foreach ($deck->deck as $card) {
-                $suit = $card->getColor();
-                $val = $card->getKingdom();
-                $cardArray[] = '[' . $suit . $val . ']';
-            }
+        $deck = new DeckOfJokers();
+        $placehold = $session->get("deckArray", $deck->deck);
+        $deck->swapShuffle($placehold);
+        $cardArray = [];
+        foreach ($deck->deck as $card) {
+            $suit = $card->getColor();
+            $val = $card->getKingdom();
+            $cardArray[] = '[' . $suit . $val . ']';
         }
         $amount = count($cardArray) - 1;
         $drawnCard = array_pop($cardArray);
-        $session->set("deckArray", $cardArray);
+        array_pop($deck->deck);
+        $session->set("deckArray", $deck->deck);
         $session->set("deck", $amount);
         $data = [
             "deck" => $amount,
@@ -100,36 +104,35 @@ class CardControllerJson extends AbstractController
         );
         return $response;
     }
-    #[Route("/api/deck/draw/middle", name: "card_json_middle", methods: ['POST'])]
+    /*#[Route("/api/deck/draw/middle", name: "card_json_middle", methods: ['POST'])]
     public function apiMiddle(
         Request $request
     ): Response {
         $num = $request->request->get('num');
-    }
+    }*/
     #[Route("/api/deck/draw/{num<\d+>}", name: "card_json_draw_num", methods: ['POST'])]
     public function apiDrawCards(
         int $num,
         SessionInterface $session
     ): Response {
         //$removedList = $session->get("cards", []);
-        if (null !== $session->get("deckArray")) {
-            $cardArray = $session->get("deckArray");
-        } else {
-            $deck = new DeckOfJokers();
-            $cardArray = [];
-            foreach ($deck->deck as $card) {
-                $suit = $card->getColor();
-                $val = $card->getKingdom();
-                $cardArray[] = '[' . $suit . $val . ']';
-            }
+        $deck = new DeckOfJokers();
+        $placehold = $session->get("deckArray", $deck->deck);
+        $deck->swapShuffle($placehold);
+        $cardArray = [];
+        foreach ($deck->deck as $card) {
+            $suit = $card->getColor();
+            $val = $card->getKingdom();
+            $cardArray[] = '[' . $suit . $val . ']';
         }
         $amount = count($cardArray) - $num;
         $drawnCards = [];
         for ($i = 1; $i <= $num; $i++) {
             $drawnCards[] = array_pop($cardArray);
+            array_pop($deck->deck);
         }
         //$drawnCard = array_pop($cardArray);
-        $session->set("deckArray", $cardArray);
+        $session->set("deckArray", $deck->deck);
         $session->set("deck", $amount);
         $data = [
             "deck" => $amount,

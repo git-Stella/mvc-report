@@ -21,41 +21,52 @@ class CardGameController extends AbstractController
         SessionInterface $session
     ): Response {
         $deck = new DeckOfJokers();
-        //add session played later and use that to figure out what is in hand and on field...
-        //for later kmom
-        if (null !== $session->get("deck")) {
-            $session->get("deck");
-        } else {
-            $session->set("deck", 54);
+        if (null === $session->get("deck")) {
+            //$session->get("deck");
+            $session->set("deck", count($deck->deck));
+        } /*else {
+            $session->set("deck", count($deck->deck));
+        }*/
+        if (null === $session->get("deckArray")) {
+            //$session->get("deckArray");
+            $session->set("deckArray", $deck->deck);
+        } //else {
+        /*$cardArray = [];
+        foreach ($deck->deck as $card) {
+            $suit = $card->getColor();
+            $val = $card->getKingdom();
+            $cardArray[] = '[' . $suit . $val . ']';
         }
-        if (null !== $session->get("deckArray")) {
-            $session->get("deckArray");
-        } else {
-            $cardArray = [];
-            foreach ($deck->deck as $card) {
-                $suit = $card->getColor();
-                $val = $card->getKingdom();
-                $cardArray[] = '[' . $suit . $val . ']';
-            }
-            $session->set("deckArray", $cardArray);
-        }
+        $session->set("deckArray", $cardArray);*/
+        //$session->set("deckArray", $deck->deck);*/
+        //}
         return $this->render('card/home.html.twig');
     }
     #[Route("/session", name: "card_session")]
-    public function card_session(
+    public function cardSession(
         SessionInterface $session
     ): Response {
         //I need removed cards and cards left...
         //I need the current deck order too...
+        $deck = new DeckOfJokers();
+        $placehold = $session->get("deckArray", $deck->deck);
+        $deck->swapShuffle($placehold);
+        //look over sort and how to integrate session later...
+        $cardArray = [];
+        foreach ($deck->deck as $card) {
+            $suit = $card->getColor();
+            $val = $card->getKingdom();
+            $cardArray[] = '[' . $suit . $val . ']';
+        }
         $data = [
-            "decklist" => $session->get("deckArray", ["empty"]),
+            "decklist" => $cardArray,
             "deck" => $session->get("deck", 0)
             //"decktest2" => $session->get("decktest2", "empty")
         ];
         return $this->render('card/session_debug.html.twig', $data);
     }
     #[Route("/session/delete", name: "card_reset")]
-    public function card_reset(
+    public function cardReset(
         SessionInterface $session
     ): Response {
         $session->clear();
@@ -67,13 +78,13 @@ class CardGameController extends AbstractController
     }
     #[Route("/card/deck", name: "card_deck")]
     public function deck(
-        //SessionInterface $session
+        SessionInterface $session
     ): Response {
         $deck = new DeckOfJokers();
-        //$toSplit = $deck->getValues();
-        //$split1 = [];
-        //$split2 = [];
-        //$splitted = [[][]];
+        $placehold = $session->get("deckArray", $deck->deck);
+        $deck->swapShuffle($placehold);
+        //look over sort and how to integrate session later...
+        $deck->sort();
         $cardArray = [];
         foreach ($deck->deck as $card) {
             $suit = $card->getColor();
@@ -94,13 +105,13 @@ class CardGameController extends AbstractController
         ];*/
         $data = [
             "deck" => $cardArray,
-            "num" => 54
+            "num" => count($cardArray)
         ];
         return $this->render('card/deck.html.twig', $data);
     }
 
     #[Route("/card/deck/shuffle", name: "card_shuffle")]
-    public function deck_shuffle(
+    public function deckShuffle(
         SessionInterface $session
     ): Response {
         $session->clear();
@@ -111,13 +122,14 @@ class CardGameController extends AbstractController
         //$split2 = [];
         //$toShuffle = $deck->getValues();
         //srand();
+        $deck->shuffle();
         $cardArray = [];
         foreach ($deck->deck as $card) {
             $suit = $card->getColor();
             $val = $card->getKingdom();
             $cardArray[] = '[' . $suit . $val . ']';
         }
-        shuffle($cardArray);
+        //shuffle($cardArray);
         //$shuffled = $deck->getValues();
 
         //$session->set("cards", []);
@@ -133,8 +145,8 @@ class CardGameController extends AbstractController
             "suits" => $suits,
             "vals" => $vals
         ];*/
-        $session->set("deckArray", $cardArray);
-        $session->set("deck", 54);
+        $session->set("deckArray", $deck->deck);
+        $session->set("deck", count($cardArray));
         $data = [
             "deck" => $cardArray,
             "num" => $session->get("deck", 0)
@@ -142,11 +154,11 @@ class CardGameController extends AbstractController
         return $this->render('card/deck.html.twig', $data);
     }
     #[Route("/card/deck/draw", name: "card_draw")]
-    public function deck_draw(
+    public function deckDraw(
         SessionInterface $session
     ): Response {
         //$removedList = $session->get("cards", []);
-        if (null !== $session->get("deckArray")) {
+        /*if (null !== $session->get("deckArray")) {
             $cardArray = $session->get("deckArray");
         } else {
             $deck = new DeckOfJokers();
@@ -156,10 +168,20 @@ class CardGameController extends AbstractController
                 $val = $card->getKingdom();
                 $cardArray[] = '[' . $suit . $val . ']';
             }
+        }*/
+        $deck = new DeckOfJokers();
+        $placehold = $session->get("deckArray", $deck->deck);
+        $deck->swapShuffle($placehold);
+        $cardArray = [];
+        foreach ($deck->deck as $card) {
+            $suit = $card->getColor();
+            $val = $card->getKingdom();
+            $cardArray[] = '[' . $suit . $val . ']';
         }
         $amount = count($cardArray) - 1;
         $drawnCard = array_pop($cardArray);
-        $session->set("deckArray", $cardArray);
+        array_pop($deck->deck);
+        $session->set("deckArray", $deck->deck);
         $session->set("deck", $amount);
         $data = [
             "deck" => $amount,
@@ -173,12 +195,12 @@ class CardGameController extends AbstractController
         return $this->render('card/draw.html.twig', $data);
     }
     #[Route("/card/deck/draw/{num<\d+>}", name: "card_draw_num")]
-    public function deck_draw_cards(
+    public function deckDrawCards(
         int $num,
         SessionInterface $session
     ): Response {
         //$removedList = $session->get("cards", []);
-        if (null !== $session->get("deckArray")) {
+        /*if (null !== $session->get("deckArray")) {
             $cardArray = $session->get("deckArray");
         } else {
             $deck = new DeckOfJokers();
@@ -188,14 +210,24 @@ class CardGameController extends AbstractController
                 $val = $card->getKingdom();
                 $cardArray[] = '[' . $suit . $val . ']';
             }
+        }*/
+        $deck = new DeckOfJokers();
+        $placehold = $session->get("deckArray", $deck->deck);
+        $deck->swapShuffle($placehold);
+        $cardArray = [];
+        foreach ($deck->deck as $card) {
+            $suit = $card->getColor();
+            $val = $card->getKingdom();
+            $cardArray[] = '[' . $suit . $val . ']';
         }
         $amount = count($cardArray) - $num;
         $drawnCards = [];
         for ($i = 1; $i <= $num; $i++) {
             $drawnCards[] = array_pop($cardArray);
+            array_pop($deck->deck);
         }
         //$drawnCard = array_pop($cardArray);
-        $session->set("deckArray", $cardArray);
+        $session->set("deckArray", $deck->deck);
         $session->set("deck", $amount);
         $data = [
             "deck" => $amount,

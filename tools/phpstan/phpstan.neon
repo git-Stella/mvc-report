@@ -1,0 +1,10 @@
+parameters:
+    level: 4
+    paths:
+        - ../../config
+        - ../../src
+        - ../../tests
+    bootstrapFiles:
+        #- .phpstan.constants.php
+    excludePaths:
+        - ../../tests/bootstrap.php
