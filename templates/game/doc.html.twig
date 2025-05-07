@@ -1,0 +1,58 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card Game{% endblock %}
+
+{% block body %}
+<h1>Card game</h1>
+
+<p>Card games are a classic.</p>
+{{ include('flash.html.twig') }}
+
+
+<h1>Flödesschema</h1>
+<img src="{{ asset('img/gameflowchart.jpg') }}" alt="classdiagram">
+
+<h1>Pseudokod</h1>
+<h2></h2>
+<p>
+    Player
+    public function calc_points() {
+        points;
+        foreach ($this->hand) {
+            (value) = $this->hand->value;
+            points += (value);
+        }
+        return points;
+    }
+    Card
+    public function choose_val() {
+        calc_points()
+    }
+    Bank
+    public function draw(card) {
+        points = calc_points()
+        if (points < 17) {
+            hand[] = card;
+            return "keep going"
+        } elseif (points > 18) {
+            return "stop"
+        } else {
+            rand(0, 100)
+            if (rand > 90) {
+                hand[] = card;
+                return "stop"
+            }
+        }
+    }
+</p>
+
+<h1>Klasser</h1>
+<ul>
+    <li>Card: Representerar korten som finns i kortleken.</li>
+    <li>DeckOfCards: Representerar hela kortleken, innehåller flera card.</li>
+    <li>DeckOfJokers: Samma som DeckOfCards men den har jokrar också.</li>
+    <li>Player: Representerar spelaren och det som spelaren kan göra.</li>
+    <li>Bank: Representerar bankiren och det som bankiren kan göra. Ärver av player.</li>
+</ul>
+
+{% endblock %}

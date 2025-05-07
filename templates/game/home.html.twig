@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card Game{% endblock %}
+
+{% block body %}
+<h1>Card game</h1>
+
+<p>Card games are a classic.</p>
+{{ include('flash.html.twig') }}
+<ul>
+    <li><a href="{{ path('game_doc') }}">21</a></li>
+</ul>
+
+<h1>Klassstruktur</h1>
+<p>
+    Här spelas en variant av spelet 21. Det går ut på att försöka komma så nära 21 som möjligt i värde utan att gå över det. 
+    Nummer korten (förutom ess) är värda vad det står på dem. Knäckt är värd 11, dam 12 och kung 13. Ess är värd antingen 1 eller 14 och 
+    joker är värd antingen 0 eller 15. Spelaren får dra ett kort och sedan välja om de är nöjda eller vill dra mer. 
+    Du spelar mot en "bankir" (som är ett simpelt program här). Bankiren´s tur börjar när spelaren är nöjd. 
+    Denna bankir vinner om det är samma siffra, större total än spelaren, eller spelaren 
+    kommer över 21. Men om bankiren kommer över 21 förlorar bankiren också. Får båda över 21 så blir det ingen som får poäng. 
+</p>
+
+{% endblock %}
