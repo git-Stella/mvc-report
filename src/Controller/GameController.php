@@ -105,7 +105,22 @@ class GameController extends AbstractController
     public function teamSatisfaction(
         SessionInterface $session
     ): Response {
-
+        //need this to add player score then redirect to game/vs
+        $session->set("playerPoints", $_POST["selector"]);
+        return $this->redirect('vs');
+    }
+    #[Route("/game/vs", name: "game_vs")]
+    public function fight(
+        SessionInterface $session
+    ): Response {
+        $bank = new Bank();
+        $bank->hand = $session->get("bankHand", []);
+        $data = [
+            "hand" => $bank->showHand(),
+            "scores" => $bank->calcPoints()
+        ];
+        //gotta make its own html page...
+        return $this->render('game/gamestate.html.twig', $data);
     }
     #[Route("/game/test", name: "game_test")]
     public function testinger(): Response
