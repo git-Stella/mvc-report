@@ -93,11 +93,11 @@ class GameController extends AbstractController
         $session->set("deck", count($deck->deck));
         $session->set("playerHand", $player->hand);
 
-        $data = [
+        /*$data = [
             "hand" => $player->showHand()
-        ];
+        ];*/
 
-        return $this->redirect('game/gamestate');
+        return $this->redirect('gamestate');
     }
     #[Route("/game/gamestate", name: "game_state")]
     public function gameState(
