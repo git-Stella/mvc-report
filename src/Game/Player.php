@@ -34,6 +34,9 @@ class Player
         $points3 = 0;
         foreach ($this->hand as $card) {
             $val = $card->getValue() + 1;
+            if ($card->getValue() == 13) {
+                $val = 0;
+            }
             $points1 += $val;
         }
         foreach ($this->hand as $card) {
@@ -43,6 +46,9 @@ class Player
             }/* else {
                 $val = $card->get_value() + 1;
             }*/
+            if ($card->getValue() == 13) {
+                $val = 0;
+            }
             $points2 += $val;
         }
         foreach ($this->hand as $card) {

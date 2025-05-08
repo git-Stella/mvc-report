@@ -10,6 +10,7 @@ use App\Card\Card;
 use App\Card\DeckOfCards;
 use App\Card\DeckOfJokers;
 use App\Game\Player;
+use App\Game\Bank;
 //use App\Dice\DiceHand;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -51,6 +52,11 @@ class GameController extends AbstractController
     #[Route("/game/test", name: "game_test")]
     public function testinger(): Response
     {
+        $bank = new Bank();
+        $deck = new DeckOfCards();
+        $deck->shuffle();
+        $slice = array_slice($deck->deck, 0, 2);
+        
         return $this->render('game/test.html.twig');
     }
 }
