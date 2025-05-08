@@ -44,12 +44,11 @@ class Bank extends Player
         return "stop";
         //$this->hand[] = $card;
     }
-    public function drawCards($deck, $num=1): void
+    public function drawCards($deck, $num = 1): void
     {
         $keepGoing = "keep going";
-        for ($i=0; $i < $num; $i++) {
-            if ($keepGoing == "keep going")
-            {
+        for ($i = 0; $i < $num; $i++) {
+            if ($keepGoing == "keep going") {
                 $card = array_pop($deck->deck);
                 $keepGoing = $this->draw($card);
             }

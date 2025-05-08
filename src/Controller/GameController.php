@@ -23,25 +23,21 @@ class GameController extends AbstractController
         SessionInterface $session
     ): Response {
         $deck = new DeckOfJokers();
+        $deck->shuffle();
+        $player = new Player();
+        $bank = new Bank();
         if (null === $session->get("deck")) {
-            //$session->get("deck");
             $session->set("deck", count($deck->deck));
-        } /*else {
-            $session->set("deck", count($deck->deck));
-        }*/
-        if (null === $session->get("deckArray")) {
-            //$session->get("deckArray");
-            $session->set("deckArray", $deck->deck);
-        } //else {
-        /*$cardArray = [];
-        foreach ($deck->deck as $card) {
-            $suit = $card->getColor();
-            $val = $card->getKingdom();
-            $cardArray[] = '[' . $suit . $val . ']';
         }
-        $session->set("deckArray", $cardArray);*/
-        //$session->set("deckArray", $deck->deck);*/
-        //}
+        if (null === $session->get("deckArray")) {
+            $session->set("deckArray", $deck->deck);
+        }
+        if (null === $session->get("playerHand")) {
+            $session->set("playerHand", $player->hand);
+        }
+        if (null === $session->get("bankHand")) {
+            $session->set("bankHand", $bank->hand);
+        }
         return $this->render('game/home.html.twig');
     }
     #[Route("/game/doc", name: "game_doc")]
@@ -52,8 +48,7 @@ class GameController extends AbstractController
     #[Route("/game/player", name: "game_doc")]
     public function playerTurn(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         return $this->render('game/doc.html.twig');
     }
     #[Route("/game/test", name: "game_test")]

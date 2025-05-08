@@ -29,6 +29,17 @@ class Player
         $this->hand = [];
         return $hand;
     }
+    public function showHand(): array
+    {
+        $hand = [];
+        foreach ($this->hand as $card) {
+            $suit = $card->getColor();
+            $val = $card->getKingdom();
+            $hand[] = '[' . $suit . $val . ']';
+        }
+        //$this->hand = [];
+        return $hand;
+    }
     public function calcPoints(): array
     {
         //$point_array = [];
