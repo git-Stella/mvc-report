@@ -49,14 +49,40 @@ class GameController extends AbstractController
     {
         return $this->render('game/doc.html.twig');
     }
+    #[Route("/game/player", name: "game_doc")]
+    public function playerTurn(
+        SessionInterface $session
+    ): Response
+    {
+        return $this->render('game/doc.html.twig');
+    }
     #[Route("/game/test", name: "game_test")]
     public function testinger(): Response
     {
         $bank = new Bank();
-        $deck = new DeckOfCards();
+        $player = new Player();
+        $deck = new DeckOfJokers();
         $deck->shuffle();
-        $slice = array_slice($deck->deck, 0, 2);
-        
-        return $this->render('game/test.html.twig');
+        //$i = 0;
+        /*$drawn = $deck->draw(3);
+        $keepGoing = "keep going";
+        foreach ($drawn as $card) {
+            if ($keepGoing = "keep going")
+            {
+                $keepGoing = $bank->draw($card);
+            }
+            //$bank->draw($card);
+        }*/
+        $bank->drawCards($deck, 3);
+        $player->drawCard($deck);
+        $player->drawCard($deck);
+        $player->drawCard($deck);
+        $data = [
+            "hand" => $bank->playHand(),
+            "phand" => $player->playHand(),
+            "deck" => $deck->returnDeck(),
+            "deckNum" => $deck->getNumberCards()
+        ];
+        return $this->render('game/test.html.twig', $data);
     }
 }

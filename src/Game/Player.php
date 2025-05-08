@@ -13,16 +13,20 @@ class Player
     {
         $this->hand = [];
     }
-    public function draw($card): void
+    public function draw($card): string
     {
         $this->hand[] = $card;
+        return "drawn";
     }
     public function playHand(): array
     {
         $hand = [];
         foreach ($this->hand as $card) {
-            $hand[] = $card;
+            $suit = $card->getColor();
+            $val = $card->getKingdom();
+            $hand[] = '[' . $suit . $val . ']';
         }
+        $this->hand = [];
         return $hand;
     }
     public function calcPoints(): array
@@ -62,5 +66,10 @@ class Player
         }
         $pointArray = [$points1, $points2, $points3];
         return $pointArray;
+    }
+    public function drawCard($deck): void
+    {
+        $card = array_pop($deck->deck);
+        $this->draw($card);
     }
 }

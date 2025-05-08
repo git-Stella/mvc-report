@@ -149,4 +149,13 @@ class DeckOfCards
         }
         return $values;
     }
+
+    public function draw($num): array
+    {
+        $drawnCards = [];
+        for ($i = 1; $i <= $num; $i++) {
+            $drawnCards[] = array_pop($this->deck);
+        }
+        return $drawnCards;
+    }
 }
