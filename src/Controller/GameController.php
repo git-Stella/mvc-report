@@ -22,22 +22,8 @@ class GameController extends AbstractController
     public function home(
         SessionInterface $session
     ): Response {
-        /*$deck = new DeckOfJokers();
-        $deck->shuffle();
-        $player = new Player();
-        $bank = new Bank();
-        if (null === $session->get("deck")) {
-            $session->set("deck", count($deck->deck));
-        }
-        if (null === $session->get("deckArray")) {
-            $session->set("deckArray", $deck->deck);
-        }
-        if (null === $session->get("playerHand")) {
-            $session->set("playerHand", $player->hand);
-        }
-        if (null === $session->get("bankHand")) {
-            $session->set("bankHand", $bank->hand);
-        }*/
+        //put in a continue button somewhere if session not empty...
+        //in home
         return $this->render('game/home.html.twig');
     }
     #[Route("/game/doc", name: "game_doc")]
@@ -65,6 +51,10 @@ class GameController extends AbstractController
         $session->set("playerScore", 0);
 
         $session->set("bankScore", 0);
+
+        $session->set("playerPoints", 0);
+
+        $session->set("bankPoints", 0);
 
         return $this->render('game/new.html.twig');
     }
@@ -106,9 +96,16 @@ class GameController extends AbstractController
         $player = new Player();
         $player->hand = $session->get("playerHand", []);
         $data = [
-            "hand" => $player->showHand()
+            "hand" => $player->showHand(),
+            "scores" => $player->calcPoints()
         ];
         return $this->render('game/gamestate.html.twig', $data);
+    }
+    #[Route("/game/satisfaction", name: "game_satisfaction", methods: ['POST'])]
+    public function teamSatisfaction(
+        SessionInterface $session
+    ): Response {
+
     }
     #[Route("/game/test", name: "game_test")]
     public function testinger(): Response

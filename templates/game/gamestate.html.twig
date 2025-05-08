@@ -14,5 +14,18 @@
         <li>{{ card }}</li>
     {% endfor %}
 </ul>
+<form action="{{ path('game_draw') }}">
+    <button type="submit" value="Val">Dra ett kort</button>
+</form>
+<h1>Är du nöjd?</h1>
+<form action="{{ path('game_satisfaction') }}" method="POST">
+    <label for="selector">Hur många poäng?</label>
+    <select name="selector">
+        {% for score in scores %}
+            <option value={{ score }}>{{ score }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" value="Val">Nöjd</button>
+</form>
 
 {% endblock %}
