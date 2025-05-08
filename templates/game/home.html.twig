@@ -12,7 +12,7 @@
     <li><a href="{{ path('game_test') }}">Test</a></li>
 </ul>
 
-<h1>Klassstruktur</h1>
+<h1>Spelregler</h1>
 <p>
     Här spelas en variant av spelet 21. Det går ut på att försöka komma så nära 21 som möjligt i värde utan att gå över det. 
     Nummer korten (förutom ess) är värda vad det står på dem. Knäckt är värd 11, dam 12 och kung 13. Ess är värd antingen 1 eller 14 och 
@@ -21,5 +21,7 @@
     Denna bankir vinner om det är samma siffra, större total än spelaren, eller spelaren 
     kommer över 21. Men om bankiren kommer över 21 förlorar bankiren också. Får båda över 21 så blir det ingen som får poäng. 
 </p>
+
+<h1><a href="{{ path('game_new') }}">Börja spela</a></h1>
 
 {% endblock %}

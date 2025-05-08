@@ -22,7 +22,7 @@ class GameController extends AbstractController
     public function home(
         SessionInterface $session
     ): Response {
-        $deck = new DeckOfJokers();
+        /*$deck = new DeckOfJokers();
         $deck->shuffle();
         $player = new Player();
         $bank = new Bank();
@@ -37,7 +37,7 @@ class GameController extends AbstractController
         }
         if (null === $session->get("bankHand")) {
             $session->set("bankHand", $bank->hand);
-        }
+        }*/
         return $this->render('game/home.html.twig');
     }
     #[Route("/game/doc", name: "game_doc")]
@@ -45,11 +45,59 @@ class GameController extends AbstractController
     {
         return $this->render('game/doc.html.twig');
     }
-    #[Route("/game/player", name: "game_doc")]
+    #[Route("/game/new", name: "game_new")]
     public function playerTurn(
         SessionInterface $session
     ): Response {
-        return $this->render('game/doc.html.twig');
+        $deck = new DeckOfJokers();
+        $deck->shuffle();
+        $player = new Player();
+        $bank = new Bank();
+
+        $session->set("deck", count($deck->deck));
+
+        $session->set("deckArray", $deck->deck);
+
+        $session->set("playerHand", $player->hand);
+
+        $session->set("bankHand", $bank->hand);
+
+        $session->set("playerScore", 0);
+
+        $session->set("bankScore", 0);
+
+        return $this->render('game/new.html.twig');
+    }
+    #[Route("/game/draw", name: "game_draw")]
+    public function playerDraw(
+        SessionInterface $session
+    ): Response {
+        $player = new Player();
+        $deck = new DeckOfJokers();
+        $deck->swapShuffle($session->get('deckArray', $deck->deck));
+        $player->hand = $session->get("playerHand", []);
+        $player->drawCard($deck);
+
+        $session->set('deckArray', $deck->deck);
+        $session->set("deck", count($deck->deck));
+        $session->set("playerHand", $player->hand);
+
+        $data = [
+            "hand" => $player->showHand()
+        ];
+
+        return $this->redirect('game/gamestate');
+    }
+    #[Route("/game/gamestate", name: "game_state")]
+    public function gameState(
+        SessionInterface $session
+    ): Response {
+        $player = new Player();
+        $player->hand = $session->get("playerHand", []);
+        $data = [
+            "hand" => $player->showHand()
+        ];
+        return $this->render('game/gamestate.html.twig', $data);
     }
     #[Route("/game/test", name: "game_test")]
     public function testinger(): Response
@@ -57,21 +105,13 @@ class GameController extends AbstractController
         $bank = new Bank();
         $player = new Player();
         $deck = new DeckOfJokers();
+
         $deck->shuffle();
-        //$i = 0;
-        /*$drawn = $deck->draw(3);
-        $keepGoing = "keep going";
-        foreach ($drawn as $card) {
-            if ($keepGoing = "keep going")
-            {
-                $keepGoing = $bank->draw($card);
-            }
-            //$bank->draw($card);
-        }*/
         $bank->drawCards($deck, 3);
         $player->drawCard($deck);
         $player->drawCard($deck);
         $player->drawCard($deck);
+
         $data = [
             "hand" => $bank->playHand(),
             "phand" => $player->playHand(),

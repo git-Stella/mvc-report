@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card Game{% endblock %}
+
+{% block body %}
+<h1>Card game</h1>
+
+<p>Card games are a classic.</p>
+{{ include('flash.html.twig') }}
+
+<h1>En ny runda har börjat.</h1>
+<form action="{{ path('game_draw') }}">
+    <button type="submit" value="Val">Dra ett kort</button>
+</form>
+
+{% endblock %}

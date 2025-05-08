@@ -48,10 +48,13 @@ class Bank extends Player
     {
         $keepGoing = "keep going";
         for ($i = 0; $i < $num; $i++) {
-            if ($keepGoing == "keep going") {
-                $card = array_pop($deck->deck);
-                $keepGoing = $this->draw($card);
+            if ($keepGoing == "stop") {
+                //$card = array_pop($deck->deck);
+                //$keepGoing = $this->draw($card);
+                break;
             }
+            $card = array_pop($deck->deck);
+            $keepGoing = $this->draw($card);
         }
     }
 }
