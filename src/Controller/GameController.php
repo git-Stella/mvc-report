@@ -68,6 +68,17 @@ class GameController extends AbstractController
 
         return $this->render('game/new.html.twig');
     }
+    #[Route("/game/clear", name: "game_clear")]
+    public function restartGame(
+        SessionInterface $session
+    ): Response {
+        $session->clear();
+        $this->addFlash(
+            'notice',
+            'Session has been cleared.'
+        );
+        return $this->redirectToRoute('game_start');
+    }
     #[Route("/game/draw", name: "game_draw")]
     public function playerDraw(
         SessionInterface $session
