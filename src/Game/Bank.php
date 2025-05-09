@@ -44,8 +44,9 @@ class Bank extends Player
         return "stop";
         //$this->hand[] = $card;
     }
-    public function drawCards($deck, $num = 1): void
+    public function drawCards($deck, $num = 10): void
     {
+        //$counter = 0;
         $keepGoing = "keep going";
         for ($i = 0; $i < $num; $i++) {
             if ($keepGoing == "stop") {
@@ -53,8 +54,24 @@ class Bank extends Player
                 //$keepGoing = $this->draw($card);
                 break;
             }
+            //$counter += 1;
             $card = array_pop($deck->deck);
             $keepGoing = $this->draw($card);
         }
+        //return $counter;
+    }
+    public function pickPoints(): int
+    {
+        $pointsArray = parent::calcPoints();
+        $filteredArray = [];
+        foreach ($pointsArray as $point) {
+            if ($point <= 21) {
+                $filteredArray[] = $point;
+            }
+        }
+        $filteredArray[] = -10;
+        //https://www.w3schools.com/php/func_math_max.asp
+        $returnPoints = max($filteredArray);
+        return $returnPoints;
     }
 }
