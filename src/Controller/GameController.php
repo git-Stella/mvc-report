@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Card\Card;
@@ -136,6 +137,9 @@ class GameController extends AbstractController
 
         $bankPoints = $bank->pickPoints();
 
+        $pScore = $session->get("playerScore", 0);
+        $bScore = $session->get("bankScore", 0);
+
         $data = [
             "hand" => $bank->showHand(),
             "phand" => $player->showHand(),
@@ -150,8 +154,10 @@ class GameController extends AbstractController
         if ($bankPoints < $pPoints) {
             $this->addFlash(
                 'notice',
-                'Player win!'
+                'Player WIN!'
             );
+            $pScore += 1;
+            $session->set("playerScore", $pScore);
             return $this->render('game/clash.html.twig', $data);
         }
 
@@ -160,15 +166,48 @@ class GameController extends AbstractController
             'Player LOSS!'
         );
 
+        $bScore += 1;
+        $session->set("bankScore", $bScore);
+
         return $this->render('game/clash.html.twig', $data);
     }
-    #[Route("/game/final", name: "game_final")]
+    #[Route("/api/game", name: "game_api")]
+    public function apiGame(
+        SessionInterface $session
+    ): Response {
+        $player = new Player();
+        $player->hand = $session->get("playerHand", []);
+
+        $bank = new Bank();
+        $bank->hand = $session->get("bankHand", []);
+
+        $deck = new DeckOfJokers();
+        $deck->swapShuffle($session->get('deckArray', $deck->deck));
+
+        $data = [
+            'player-hand' => $player->showHand(),
+            'bank-hand' => $bank->showHand(),
+            'deck-number' => $session->get('deck', count($deck->deck)),
+            'player-score' => $session->get('playerScore', 0),
+            'bank-score' => $session->get('bankScore', 0),
+            'deck' => $deck->returnDeck()
+        ];
+
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
+    /*#[Route("/game/final", name: "game_final")]
     public function finale(
         SessionInterface $session
     ): Response {
         //just gotta finish up the final one for the reset...
-        return $this->render('game/clash.html.twig', $data);
-    }
+        $pScore = $session->get("playerScore", 0);
+        $bScore = $session->get("bankScore", 0);
+        return $this->redirect('game_new');
+    }*/
     #[Route("/game/test", name: "game_test")]
     public function testinger(): Response
     {

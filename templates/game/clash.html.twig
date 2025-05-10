@@ -21,8 +21,19 @@
     {% endfor %}
 </ul>
 
-<form action="{{ path('game_final') }}">
-    <button type="submit" value="Val">Resultat</button>
+<h1>Ny runda</h1>
+<form action="{{ path('game_new') }}">
+    <button type="submit" value="Val">Ny runda</button>
+</form>
+
+<h1>Status JSON</h1>
+<form action="{{ path('game_new') }}">
+    <button type="submit" value="Val">JSON</button>
+</form>
+
+<h1>Avsluta</h1>
+<form action="{{ path('game_clear') }}">
+    <button type="submit" value="Val">Avsluta</button>
 </form>
 
 {% endblock %}
