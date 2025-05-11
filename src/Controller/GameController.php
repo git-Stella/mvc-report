@@ -25,6 +25,7 @@ class GameController extends AbstractController
     ): Response {
         //put in a continue button somewhere if session not empty...
         //in home
+        //need to grab session data?
         return $this->render('game/home.html.twig');
     }
     #[Route("/game/doc", name: "game_doc")]
