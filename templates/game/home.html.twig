@@ -9,7 +9,7 @@
 {{ include('flash.html.twig') }}
 <ul>
     <li><a href="{{ path('game_doc') }}">Dokumentation</a></li>
-    <li><a href="{{ path('game_test') }}">Test</a></li>
+    <li><a href="{{ path('game_api') }}">Api</a></li>
 </ul>
 
 <h1>Spelregler</h1>
@@ -23,5 +23,7 @@
 </p>
 
 <h1><a href="{{ path('game_new') }}">Börja spela</a></h1>
+
+<h1><a href="{{ path('game_clear') }}">Töm session</a></h1>
 
 {% endblock %}
