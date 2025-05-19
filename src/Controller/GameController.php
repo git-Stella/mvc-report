@@ -17,6 +17,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 //put version of deck with jokers in json api...
+/**
+ * Controller for the game in kmom03
+ */
 class GameController extends AbstractController
 {
     #[Route("/game", name: "game_start")]

@@ -45,7 +45,7 @@ class Card
         return "$this->value and $this->suit";
     }
 
-    public function valFromKingdom($role, $faction): void
+    public function valFromKingdom($role, $faction): string
     {
         $dict = [
             "A" => 0,
@@ -65,6 +65,7 @@ class Card
         ];
         $val = $dict[$role];
         $this->setValue($val, $faction);
+        return "$this->value and $this->suit";
     }
 
     public function getValue(): int
