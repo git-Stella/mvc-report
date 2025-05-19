@@ -42,15 +42,13 @@ class Bank extends Player
             $this->hand[] = $card;
             return "keep going";
         }
-        if ($currentPoints > 18) {
-            return "stop";
-        }
-        $random = rand(0, 100);
+        return "stop";
+        /*$random = rand(0, 100);
         if ($random > 90) {
             $this->hand[] = $card;
             return "stop";
         }
-        return "stop";
+        return "stop";*/
         //$this->hand[] = $card;
     }
     /**

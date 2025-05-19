@@ -32,4 +32,12 @@ class DeckOfJokersTest extends TestCase
         $num = $deck->getNumberCards();
         $this->assertEquals($num, 53);
     }
+    public function testSort()
+    {
+        $deck = new DeckOfJokers();
+        $compare = $deck->deck;
+        $deck->shuffle();
+        $deck->sort();
+        $this->assertEquals($deck->deck, $compare);
+    }
 }

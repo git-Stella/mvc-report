@@ -21,4 +21,11 @@ class DiceTest extends TestCase
         $res = $die->getAsString();
         $this->assertNotEmpty($res);
     }
+    public function testGetValue()
+    {
+        $die = new Dice();
+        $this->assertNotEmpty($die->getValue());
+        $die->roll();
+        $this->assertNotEmpty($die->getValue());
+    }
 }

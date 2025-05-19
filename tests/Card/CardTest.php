@@ -18,14 +18,18 @@ class CardTest extends TestCase
         $card = new Card();
         $this->assertInstanceOf("\App\Card\Card", $card);
 
-        //$res = $die->getAsString();
-        //$this->assertNotEmpty($res);
+        $res = $card->getAsString();
+        $this->assertNotEmpty($res);
     }
     public function testSetValues()
     {
         $card = new Card();
-        $res = $card->setValue(0, "spades");
-        $this->assertEquals($res, "0 and spades");
+        $res = $card->setValue(1, "spades");
+        $this->assertEquals($res, "1 and spades");
+        $this->assertNotEmpty($card->value);
+        $this->assertNotEmpty($card->kingdom);
+        $this->assertNotEmpty($card->suit);
+        $this->assertNotEmpty($card->color);
     }
     public function testValFromKingdom()
     {

@@ -39,5 +39,20 @@ class DiceHandTest extends TestCase
         $this->assertEquals($hand->getNumberDices(), 2);
         $this->assertEquals($hand->getValues(), [$val1, $val2]);
         $this->assertEquals($hand->getString(), [$str1, $str2]);
+        $this->assertNotEmpty($hand->hand);
+    }
+    public function testRoll()
+    {
+        $hand = new DiceHand();
+        $die1 = new Dice();
+        $die2 = new Dice();
+        $hand->add($die1);
+        $hand->add($die2);
+
+        $val1 = $die1->getValue();
+        $val2 = $die2->getValue();
+
+        $hand->roll();
+        $this->assertNotEquals($hand->getValues(), [$val1, $val2]);
     }
 }

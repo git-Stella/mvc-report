@@ -3,6 +3,7 @@
 namespace App\Game;
 
 use App\Card\DeckOfCards;
+//use App\Card\DeckOfJokers;
 use App\Card\Card;
 use PHPUnit\Framework\TestCase;
 
@@ -24,6 +25,7 @@ class BankTest extends TestCase
     {
         $bank = new Bank();
         $deck = new DeckOfCards();
+        $card = new Card();
         //$card = new Card();
         //$card->setValue(6, "spades");
         //$deck->remove("A-hearts");
@@ -32,6 +34,8 @@ class BankTest extends TestCase
         $this->assertEmpty($bank->hand);
         $bank->drawCards($deck);
         $this->assertNotEmpty($bank->hand);
+        $res = $bank->draw($card);
+        $this->assertEquals($res, "stop");
     }
     public function testDrawResponses()
     {

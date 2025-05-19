@@ -136,6 +136,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Card-DeckOfJokers.html#method___construct"
         },                {
+            "fqsen": "\\App\\Card\\DeckOfJokers\u003A\u003Asort\u0028\u0029",
+            "name": "sort",
+            "summary": "",
+            "url": "classes/App-Card-DeckOfJokers.html#method_sort"
+        },                {
             "fqsen": "\\App\\Controller\\CardControllerJson",
             "name": "CardControllerJson",
             "summary": "",

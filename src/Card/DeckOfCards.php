@@ -51,9 +51,6 @@ class DeckOfCards
             if ($card->getSuit() == "clubs") {
                 $clubs[] = $card;
             }
-            if ($card->getSuit() == "joker") {
-                $joker[] = $card;
-            }
         }
         sort($hearts);
         sort($diamonds);
@@ -71,23 +68,7 @@ class DeckOfCards
                 $newDeck[] = $curSuit;
             }
         }
-        /*foreach ($hearts as $heart) {
-            $newDeck[] = $heart;
-        }
-        foreach ($diamonds as $diamond) {
-            $newDeck[] = $diamond;
-        }
-        foreach ($spades as $spade) {
-            $newDeck[] = $spade;
-        }
-        foreach ($clubs as $club) {
-            $newDeck[] = $club;
-        }
-        foreach ($joker as $joker) {
-            $newDeck[] = $joker;
-        }*/
         $this->deck = $newDeck;
-        //sort($this->deck);
     }
 
     public function swapShuffle($deckArray): void

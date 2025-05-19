@@ -2,8 +2,8 @@
 
 namespace App\Card;
 
-//use App\Card\Card;
-
+use App\Card\Card;
+use App\Card\DeckOfCards;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,7 +21,13 @@ class DeckOfCardsTest extends TestCase
         $this->assertInstanceOf("\App\Card\DeckOfCards", $deck);
 
         //$res = $die->getAsString();
-        //$this->assertNotEmpty($res);
+        $this->assertNotEmpty($deck->deck);
+    }
+    public function testDraw()
+    {
+        $deck = new DeckOfCards();
+        $hand = $deck->draw(5);
+        $this->assertNotEmpty($hand);
     }
     public function testShuffle()
     {
@@ -54,5 +60,18 @@ class DeckOfCardsTest extends TestCase
         $deck->remove("jack-hearts");
         $num = $deck->getNumberCards();
         $this->assertEquals($num, 51);
+    }
+    public function testReturnDeck()
+    {
+        $deck = new DeckOfCards();
+        $check = $deck->returnDeck();
+        $this->assertNotEmpty($check);
+    }
+    public function testAdd()
+    {
+        $deck = new DeckOfCards();
+        $card = new Card();
+        $deck->add($card);
+        $this->assertEquals($deck->getNumberCards(), 53);
     }
 }

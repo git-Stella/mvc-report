@@ -22,4 +22,47 @@ class DeckOfJokers extends DeckOfCards
         $this->deck[] = $joker1;
         $this->deck[] = $joker2;
     }
+    public function sort(): void
+    {
+        $newDeck = [];
+        $hearts = [];
+        $diamonds = [];
+        $spades = [];
+        $clubs = [];
+        $joker = [];
+        foreach ($this->deck as $card) {
+            if ($card->getSuit() == "hearts") {
+                $hearts[] = $card;
+            }
+            if ($card->getSuit() == "diamonds") {
+                $diamonds[] = $card;
+            }
+            if ($card->getSuit() == "spades") {
+                $spades[] = $card;
+            }
+            if ($card->getSuit() == "clubs") {
+                $clubs[] = $card;
+            }
+            if ($card->getSuit() == "joker") {
+                $joker[] = $card;
+            }
+        }
+        sort($hearts);
+        sort($diamonds);
+        sort($spades);
+        sort($clubs);
+        $suits = [
+            $hearts,
+            $diamonds,
+            $spades,
+            $clubs,
+            $joker
+        ];
+        foreach ($suits as $suit) {
+            foreach ($suit as $curSuit) {
+                $newDeck[] = $curSuit;
+            }
+        }
+        $this->deck = $newDeck;
+    }
 }
