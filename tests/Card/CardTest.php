@@ -5,7 +5,7 @@ namespace App\Card;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Test cases for class Dice.
+ * Test cases for class Card.
  */
 class CardTest extends TestCase
 {
@@ -32,5 +32,16 @@ class CardTest extends TestCase
         $card = new Card();
         $res = $card->valFromKingdom("jack", "spades");
         $this->assertEquals($res, "10 and spades");
+    }
+    public function testGetFunctions()
+    {
+        $card = new Card();
+        $res = $card->setValue(0, "spades");
+        $this->assertEquals($card->getValue(), 0);
+        $this->assertEquals($card->getSuit(), "spades");
+        $this->assertEquals($card->getColor(), "♠️");
+        $this->assertEquals($card->getKingdom(), "A");
+        $this->assertEquals($card->getCard(), "♠️?A");
+        //$this->assertEquals($card->getAsString(), "[{0}]");
     }
 }

@@ -116,16 +116,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Card-DeckOfCards.html#method_returnDeck"
         },                {
-            "fqsen": "\\App\\Card\\DeckOfCards\u003A\u003AgetValues\u0028\u0029",
-            "name": "getValues",
-            "summary": "",
-            "url": "classes/App-Card-DeckOfCards.html#method_getValues"
-        },                {
-            "fqsen": "\\App\\Card\\DeckOfCards\u003A\u003AgetString\u0028\u0029",
-            "name": "getString",
-            "summary": "",
-            "url": "classes/App-Card-DeckOfCards.html#method_getString"
-        },                {
             "fqsen": "\\App\\Card\\DeckOfCards\u003A\u003Adraw\u0028\u0029",
             "name": "draw",
             "summary": "",
@@ -473,62 +463,62 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Game\\Bank",
             "name": "Bank",
-            "summary": "",
+            "summary": "Class\u0020representing\u0020the\u0020bank\u0020in\u0020the\u0020game\u002021.\u0020Extends\u0020class\u0020player.",
             "url": "classes/App-Game-Bank.html"
         },                {
             "fqsen": "\\App\\Game\\Bank\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructor\u0020for\u0020the\u0020bank.",
             "url": "classes/App-Game-Bank.html#method___construct"
         },                {
             "fqsen": "\\App\\Game\\Bank\u003A\u003Adraw\u0028\u0029",
             "name": "draw",
-            "summary": "",
+            "summary": "Method\u0020to\u0020draw\u0020card.",
             "url": "classes/App-Game-Bank.html#method_draw"
         },                {
             "fqsen": "\\App\\Game\\Bank\u003A\u003AdrawCards\u0028\u0029",
             "name": "drawCards",
-            "summary": "",
+            "summary": "Method\u0020to\u0020draw\u0020cards\u0020from\u0020a\u0020deck.",
             "url": "classes/App-Game-Bank.html#method_drawCards"
         },                {
             "fqsen": "\\App\\Game\\Bank\u003A\u003ApickPoints\u0028\u0029",
             "name": "pickPoints",
-            "summary": "",
+            "summary": "Method\u0020to\u0020make\u0020sure\u0020the\u0020bank\u0020automatically\u0020picks\u0020the\u0020optimal\u0020points.",
             "url": "classes/App-Game-Bank.html#method_pickPoints"
         },                {
             "fqsen": "\\App\\Game\\Player",
             "name": "Player",
-            "summary": "",
+            "summary": "Class\u0020representing\u0020the\u0020player\u0020in\u0020the\u0020game\u002021.",
             "url": "classes/App-Game-Player.html"
         },                {
             "fqsen": "\\App\\Game\\Player\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructor\u0020for\u0020player\u0020class.",
             "url": "classes/App-Game-Player.html#method___construct"
         },                {
             "fqsen": "\\App\\Game\\Player\u003A\u003Adraw\u0028\u0029",
             "name": "draw",
-            "summary": "",
+            "summary": "Method\u0020to\u0020draw\u0020cards\u0020to\u0020hand.",
             "url": "classes/App-Game-Player.html#method_draw"
         },                {
             "fqsen": "\\App\\Game\\Player\u003A\u003AplayHand\u0028\u0029",
             "name": "playHand",
-            "summary": "",
+            "summary": "Method\u0020to\u0020play\u0020the\u0020hand,\u0020emptying\u0020it.",
             "url": "classes/App-Game-Player.html#method_playHand"
         },                {
             "fqsen": "\\App\\Game\\Player\u003A\u003AshowHand\u0028\u0029",
             "name": "showHand",
-            "summary": "",
+            "summary": "Method\u0020for\u0020showing\u0020the\u0020hand,\u0020giving\u0020a\u0020sneak\u0020peak.",
             "url": "classes/App-Game-Player.html#method_showHand"
         },                {
             "fqsen": "\\App\\Game\\Player\u003A\u003AcalcPoints\u0028\u0029",
             "name": "calcPoints",
-            "summary": "",
+            "summary": "Method\u0020for\u0020calculating\u0020how\u0020many\u0020points\u0020a\u0020hand\u0020is\u0020worth.",
             "url": "classes/App-Game-Player.html#method_calcPoints"
         },                {
             "fqsen": "\\App\\Game\\Player\u003A\u003AdrawCard\u0028\u0029",
             "name": "drawCard",
-            "summary": "",
+            "summary": "Method\u0020to\u0020draw\u0020cards\u0020from\u0020a\u0020deck.",
             "url": "classes/App-Game-Player.html#method_drawCard"
         },                {
             "fqsen": "\\App\\Game\\Player\u003A\u003A\u0024hand",

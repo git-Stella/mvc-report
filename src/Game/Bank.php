@@ -5,13 +5,22 @@ namespace App\Game;
 use App\Card\Deck;
 use App\Card\Card;
 
+/**
+ * Class representing the bank in the game 21. Extends class player.
+ */
 class Bank extends Player
 {
     //private $hand;
+    /**
+     * Constructor for the bank.
+     */
     public function __construct()
     {
         parent::__construct();
     }
+    /**
+     * Method to draw card.
+     */
     public function draw($card): string
     {
         //do something with calc_points to check how valuable hand is
@@ -44,6 +53,9 @@ class Bank extends Player
         return "stop";
         //$this->hand[] = $card;
     }
+    /**
+     * Method to draw cards from a deck.
+     */
     public function drawCards($deck, $num = 10): void
     {
         //$counter = 0;
@@ -60,6 +72,9 @@ class Bank extends Player
         }
         //return $counter;
     }
+    /**
+     * Method to make sure the bank automatically picks the optimal points.
+     */
     public function pickPoints(): int
     {
         $pointsArray = parent::calcPoints();

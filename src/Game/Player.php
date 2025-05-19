@@ -2,22 +2,33 @@
 
 namespace App\Game;
 
-use App\Card\Deck;
+//use App\Card\DeckOfJokers;
 use App\Card\Card;
 
+/**
+ * Class representing the player in the game 21.
+ */
 class Player
 {
     public $hand;
-    //private $hand;
+    /**
+     * Constructor for player class.
+     */
     public function __construct()
     {
         $this->hand = [];
     }
+    /**
+     * Method to draw cards to hand.
+     */
     public function draw($card): string
     {
         $this->hand[] = $card;
         return "drawn";
     }
+    /**
+     * Method to play the hand, emptying it.
+     */
     public function playHand(): array
     {
         $hand = [];
@@ -29,6 +40,9 @@ class Player
         $this->hand = [];
         return $hand;
     }
+    /**
+     * Method for showing the hand, giving a sneak peak.
+     */
     public function showHand(): array
     {
         $hand = [];
@@ -40,6 +54,9 @@ class Player
         //$this->hand = [];
         return $hand;
     }
+    /**
+     * Method for calculating how many points a hand is worth.
+     */
     public function calcPoints(): array
     {
         //$point_array = [];
@@ -78,6 +95,9 @@ class Player
         $pointArray = [$points1, $points2, $points3];
         return $pointArray;
     }
+    /**
+     * Method to draw cards from a deck.
+     */
     public function drawCard($deck): void
     {
         $card = array_pop($deck->deck);

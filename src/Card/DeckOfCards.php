@@ -128,7 +128,7 @@ class DeckOfCards
         return $cardArray;
     }
 
-    public function getValues(): array
+    /*public function getValues(): array
     {
         //$values = [];
         //$suits = [];
@@ -148,7 +148,7 @@ class DeckOfCards
             $values[] = $card->getAsString();
         }
         return $values;
-    }
+    }*/
 
     public function draw($num): array
     {
