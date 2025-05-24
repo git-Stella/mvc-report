@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library{% endblock %}
+
+{% block body %}
+{{ include('flash.html.twig') }}
+<h1>Library</h1>
+ <table>
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+  </tr>
+  {% for book in library %}
+    <tr>
+        <td><a href="{{ path('library_view_id', {id: book.getId|e}) }}">{{ book.getTitle|e }}</a></td>
+        <td>{{ book.getAuthor|e }}</td>
+    </tr>
+{% endfor %}
+</table> 
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ book.getTitle|e }}{% endblock %}
+
+{% block body %}
+{{ include('flash.html.twig') }}
+    <p><a href="{{ path('app_library_update', {id: book.getId|e}) }}">Update</a> | <a href="{{ path('app_library_delete', {id: book.getId|e}) }}">Delete</a></p>
+    <h2>
+        Title: {{ book.getTitle|e }}<br>
+        ISBN: {{ book.getIsbn|e }}<br>
+        Author: {{ book.getAuthor|e }}
+    </h2>
+    <img src="{{ book.getPicture|e }}" alt="{{ book.getTitle|e }}">
+{% endblock %}

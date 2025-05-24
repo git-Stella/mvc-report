@@ -17,7 +17,7 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * Find all producs having a value above the specified one.
+     * Find all products having a value above the specified one.
      * 
      * @return Product[] Returns an array of Product objects
      */
@@ -33,7 +33,7 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * Find all producs having a value above the specified one with SQL.
+     * Find all products having a value above the specified one with SQL.
      * 
      * @return [][] Returns an array of arrays (i.e. a raw data set)
      */

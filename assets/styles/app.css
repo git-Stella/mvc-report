@@ -87,3 +87,7 @@ footer {
 .hand {
     font-size: 150%;
 }
+
+table, th, td {
+    border: 1px solid;
+}
