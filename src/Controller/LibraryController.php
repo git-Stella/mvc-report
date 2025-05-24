@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,6 +34,33 @@ final class LibraryController extends AbstractController
         //gotta change the view here to show a table or something
 
         return $this->render('library/view.html.twig', $data);
+    }
+    #[Route('/api/library/books', name: 'api_library')]
+    public function viewApiLibrary(
+        LibraryRepository $libraryRepository
+    ): Response {
+        $library = $libraryRepository
+            ->findAll();
+
+        $books = [];
+        foreach ($library as $book) {
+            $books[] = "Title: " . 
+            $book->getTitle() . " Author: " .
+            $book->getAuthor() . " ISBN: " . 
+            $book->getIsbn() . " Image url: " .
+            $book->getPicture();
+        }
+        //$books[] = $library;
+
+        $data = [
+            'library' => $books
+        ];
+
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
     }
     #[Route('/library/one/{id}', name: 'library_view_id')]
     public function viewOneLibrary(
