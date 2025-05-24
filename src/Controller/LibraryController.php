@@ -144,6 +144,29 @@ final class LibraryController extends AbstractController
         $data = [
             'book' => $library
         ];
-        return $this->render('library/create.html.twig');
+        return $this->render('library/delete.html.twig', $data);
+    }
+    #[Route('/library/delete_post', name: 'post_library_delete', methods: ['POST'])]
+    public function delete_the_book(
+        Request $request,
+        ManagerRegistry $doctrine
+    ): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $id = $request->request->get('id');
+        $book = $entityManager->getRepository(Library::class)->find($id);
+
+        if (!$book) {
+            $this->addFlash(
+                'warning',
+                'Book does not exist'
+            );
+            return $this->redirectToRoute('library_view_all');
+        }
+
+        $entityManager->remove($book);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('library_view_all');
     }
 }

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Delete book{% endblock %}
+
+{% block body %}
+{{ include('flash.html.twig') }}
+<h2>Are you sure you wish to delete?</h2>
+<form method="POST" action="{{ path('post_library_delete') }}">
+    <input type="hidden" id="id" name="id" value="{{ book.getId|e }}">
+    <input type="submit" value="Yes">
+</form>
+{% endblock %}
