@@ -74,7 +74,7 @@ final class LibraryController extends AbstractController
 
         $this->addFlash(
             'notice',
-            'This worked'
+            'Book added to library'
         );
         $entityManager->persist($library);
         $entityManager->flush();
@@ -93,7 +93,44 @@ final class LibraryController extends AbstractController
         $data = [
             'book' => $library
         ];
-        return $this->render('library/create.html.twig');
+        return $this->render('library/update.html.twig', $data);
+    }
+    #[Route('/library/update_post', name: 'post_library_update', methods: ['POST'])]
+    public function update_the_book(
+        //LibraryRepository $libraryRepository,
+        Request $request,
+        ManagerRegistry $doctrine
+    ): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $id = $request->request->get('id');
+        $title = $request->request->get('title');
+        $author = $request->request->get('author');
+        $isbn = $request->request->get('isbn');
+        $image = $request->request->get('image');
+        $library = $entityManager->getRepository(Library::class)->find($id);
+
+        if (!$library) {
+            $this->addFlash(
+                'warning',
+                'Book does not exist'
+            );
+            return $this->redirectToRoute('library_view_all');
+        }
+
+        $library->setTitle($title);
+        $library->setIsbn($isbn);
+        $library->setAuthor($author);
+        $library->setPicture($image);
+
+        $this->addFlash(
+            'notice',
+            'Book updated'
+        );
+        //$entityManager->persist($library);
+        $entityManager->flush();
+        //return $this->render('library/create.html.twig');
+        return $this->redirectToRoute('library_view_all');
     }
     #[Route('/library/delete/{id}', name: 'app_library_delete', methods: ['GET'])]
     public function delete_book(
