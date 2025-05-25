@@ -23,7 +23,7 @@ class LibraryRepository extends ServiceEntityRepository
                 ->setParameter('val', $isbn)
                 ->getQuery()
                 ->getOneOrNullResult()
-                ;
+        ;
     }
 
     public function findByIsbn($isbn): ?Library
@@ -35,7 +35,7 @@ class LibraryRepository extends ServiceEntityRepository
                 ->setMaxResults(1)
                 ->getQuery()
                 ->getResult()
-                ;
+        ;
     }
 
     //    /**
