@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
-
 use App\Entity\Library;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\LibraryRepository;
@@ -44,9 +43,9 @@ final class LibraryController extends AbstractController
 
         $books = [];
         foreach ($library as $book) {
-            $books[] = "Title: " . 
+            $books[] = "Title: " .
             $book->getTitle() . " Author: " .
-            $book->getAuthor() . " ISBN: " . 
+            $book->getAuthor() . " ISBN: " .
             $book->getIsbn() . " Image url: " .
             $book->getPicture();
         }
@@ -56,6 +55,25 @@ final class LibraryController extends AbstractController
             'library' => $books
         ];
 
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
+    #[Route('/api/library/book/{isbn}', name: 'api_isbn')]
+    public function viewApiBook(
+        LibraryRepository $libraryRepository,
+        string $isbn
+    ): Response {
+        $book = $libraryRepository
+            ->findOneByIsbn($isbn);
+        $data = [
+            'title' => $book->getTitle(),
+            'author' => $book->getAuthor(),
+            'isbn' => $book->getIsbn(),
+            'image' => $book->getPicture()
+        ];
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
@@ -85,8 +103,7 @@ final class LibraryController extends AbstractController
     public function create_a_book(
         Request $request,
         ManagerRegistry $doctrine
-    ): Response
-    {
+    ): Response {
         //$numDice = $request->request->get('num_dices');
         $entityManager = $doctrine->getManager();
         $title = $request->request->get('title');
@@ -113,8 +130,7 @@ final class LibraryController extends AbstractController
     public function update_book(
         LibraryRepository $libraryRepository,
         int $id
-    ): Response
-    {
+    ): Response {
         $library = $libraryRepository
             ->find($id);
 
@@ -128,8 +144,7 @@ final class LibraryController extends AbstractController
         //LibraryRepository $libraryRepository,
         Request $request,
         ManagerRegistry $doctrine
-    ): Response
-    {
+    ): Response {
         $entityManager = $doctrine->getManager();
         $id = $request->request->get('id');
         $title = $request->request->get('title');
@@ -164,8 +179,7 @@ final class LibraryController extends AbstractController
     public function delete_book(
         LibraryRepository $libraryRepository,
         int $id
-    ): Response
-    {
+    ): Response {
         $library = $libraryRepository
             ->find($id);
 
@@ -178,8 +192,7 @@ final class LibraryController extends AbstractController
     public function delete_the_book(
         Request $request,
         ManagerRegistry $doctrine
-    ): Response
-    {
+    ): Response {
         $entityManager = $doctrine->getManager();
         $id = $request->request->get('id');
         $book = $entityManager->getRepository(Library::class)->find($id);

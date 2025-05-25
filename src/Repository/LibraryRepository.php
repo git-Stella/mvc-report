@@ -16,6 +16,28 @@ class LibraryRepository extends ServiceEntityRepository
         parent::__construct($registry, Library::class);
     }
 
+    public function findOneByIsbn($isbn): ?Library
+    {
+        return $this->createQueryBuilder('l')
+                ->andWhere('l.isbn = :val')
+                ->setParameter('val', $isbn)
+                ->getQuery()
+                ->getOneOrNullResult()
+                ;
+    }
+
+    public function findByIsbn($isbn): ?Library
+    {
+        return $this->createQueryBuilder('l')
+                ->andWhere('l.isbn = :val')
+                ->setParameter('val', $isbn)
+                ->orderBy('l.id', 'ASC')
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getResult()
+                ;
+    }
+
     //    /**
     //     * @return Library[] Returns an array of Library objects
     //     */

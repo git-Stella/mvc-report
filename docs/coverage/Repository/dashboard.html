@@ -2,7 +2,7 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Dashboard for /home/stelladess/dbwebb-kurser/mvc/me/report/src/Game</title>
+  <title>Dashboard for /home/stelladess/dbwebb-kurser/mvc/me/report/src/Repository</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../_css/bootstrap.min.css?v=9.2.32" rel="stylesheet" type="text/css">
   <link href="../_css/nv.d3.min.css?v=9.2.32" rel="stylesheet" type="text/css">
@@ -17,7 +17,7 @@
       <nav aria-label="breadcrumb">
        <ol class="breadcrumb">
          <li class="breadcrumb-item"><a href="../index.html">/home/stelladess/dbwebb-kurser/mvc/me/report/src</a></li>
-         <li class="breadcrumb-item"><a href="index.html">Game</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Repository</a></li>
          <li class="breadcrumb-item active">(Dashboard)</li>
 
        </ol>
@@ -58,6 +58,8 @@
         </tr>
        </thead>
        <tbody>
+       <tr><td><a href="LibraryRepository.php.html#12">App\Repository\LibraryRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductRepository.php.html#12">App\Repository\ProductRepository</a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -111,6 +113,10 @@
         </tr>
        </thead>
        <tbody>
+       <tr><td><a href="LibraryRepository.php.html#14"><abbr title="App\Repository\LibraryRepository::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductRepository.php.html#14"><abbr title="App\Repository\ProductRepository::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductRepository.php.html#24"><abbr title="App\Repository\ProductRepository::findByMinimumValue">findByMinimumValue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductRepository.php.html#40"><abbr title="App\Repository\ProductRepository::findByMinimumValue2">findByMinimumValue2</abbr></a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -155,7 +161,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#classCoverageDistribution svg')
-      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,2], "Class Coverage"))
+      .datum(getCoverageDistributionData([2,0,0,0,0,0,0,0,0,0,0,0], "Class Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -173,7 +179,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#methodCoverageDistribution svg')
-      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,10], "Method Coverage"))
+      .datum(getCoverageDistributionData([4,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -223,7 +229,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[100,12,"<a href=\"Bank.php.html#11\">App\\Game\\Bank<\/a>"],[100,15,"<a href=\"Player.php.html#11\">App\\Game\\Player<\/a>"]], 'Class Complexity'))
+      .datum(getComplexityData([[0,1,"<a href=\"LibraryRepository.php.html#12\">App\\Repository\\LibraryRepository<\/a>"],[0,3,"<a href=\"ProductRepository.php.html#12\">App\\Repository\\ProductRepository<\/a>"]], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -247,7 +253,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[100,1,"<a href=\"Bank.php.html#17\">App\\Game\\Bank::__construct<\/a>"],[100,5,"<a href=\"Bank.php.html#24\">App\\Game\\Bank::draw<\/a>"],[100,3,"<a href=\"Bank.php.html#57\">App\\Game\\Bank::drawCards<\/a>"],[100,3,"<a href=\"Bank.php.html#76\">App\\Game\\Bank::pickPoints<\/a>"],[100,1,"<a href=\"Player.php.html#17\">App\\Game\\Player::__construct<\/a>"],[100,1,"<a href=\"Player.php.html#24\">App\\Game\\Player::draw<\/a>"],[100,2,"<a href=\"Player.php.html#32\">App\\Game\\Player::playHand<\/a>"],[100,2,"<a href=\"Player.php.html#46\">App\\Game\\Player::showHand<\/a>"],[100,8,"<a href=\"Player.php.html#60\">App\\Game\\Player::calcPoints<\/a>"],[100,1,"<a href=\"Player.php.html#101\">App\\Game\\Player::drawCard<\/a>"]], 'Method Complexity'))
+      .datum(getComplexityData([[0,1,"<a href=\"LibraryRepository.php.html#14\">App\\Repository\\LibraryRepository::__construct<\/a>"],[0,1,"<a href=\"ProductRepository.php.html#14\">App\\Repository\\ProductRepository::__construct<\/a>"],[0,1,"<a href=\"ProductRepository.php.html#24\">App\\Repository\\ProductRepository::findByMinimumValue<\/a>"],[0,1,"<a href=\"ProductRepository.php.html#40\">App\\Repository\\ProductRepository::findByMinimumValue2<\/a>"]], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);
