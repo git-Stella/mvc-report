@@ -7,15 +7,18 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Card\Card;
-//use App\Card\CardGraphic;
-//use App\Card\DeckOfCards;
 use App\Card\DeckOfJokers;
-//use App\Dice\DiceHand;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/**
+ * Controller class for cards JSON API routes.
+ */
 class CardControllerJson extends AbstractController
 {
+    /**
+     * Route for content in deck in json api format.
+     */
     #[Route("/api/deck", name: "card_api_deck", methods: ['GET'])]
     public function apiDeck(
         SessionInterface $session
@@ -23,7 +26,6 @@ class CardControllerJson extends AbstractController
         $deck = new DeckOfJokers();
         $placehold = $session->get("deckArray", $deck->deck);
         $deck->swapShuffle($placehold);
-        //look over sort and how to integrate session later...
         $deck->sort();
         $cardArray = [];
         foreach ($deck->deck as $card) {
@@ -40,11 +42,17 @@ class CardControllerJson extends AbstractController
         );
         return $response;
     }
+    /**
+     * Route to decide if you wish to shuffle the deck before showing it in a json api format.
+     */
     #[Route("/api/deck/shuffle", name: "card_api_shuffle", methods: ['GET'])]
     public function apiShuff(): Response
     {
         return $this->render('card/api_shuffle.html.twig');
     }
+    /**
+     * Route to shuffle the deck before showing it in a json api format.
+     */
     #[Route("/api/deck/shuffle", name: "card_json_shuffle", methods: ['POST'])]
     public function apiShuffle(
         SessionInterface $session
@@ -70,16 +78,21 @@ class CardControllerJson extends AbstractController
         );
         return $response;
     }
+    /**
+     * Route to decide if you will draw card from deck and show it in json api format.
+     */
     #[Route("/api/deck/draw", name: "card_api_draw", methods: ['GET'])]
     public function apiDraw(): Response
     {
         return $this->render('card/api_draw.html.twig');
     }
+    /**
+     * Route to draw card from deck and show it in json api format.
+     */
     #[Route("/api/deck/draw", name: "card_json_draw", methods: ['POST'])]
     public function apiDrawCard(
         SessionInterface $session
     ): Response {
-        //$removedList = $session->get("cards", []);
         $deck = new DeckOfJokers();
         $placehold = $session->get("deckArray", $deck->deck);
         $deck->swapShuffle($placehold);
@@ -104,18 +117,14 @@ class CardControllerJson extends AbstractController
         );
         return $response;
     }
-    /*#[Route("/api/deck/draw/middle", name: "card_json_middle", methods: ['POST'])]
-    public function apiMiddle(
-        Request $request
-    ): Response {
-        $num = $request->request->get('num');
-    }*/
+    /**
+     * Route to draw cards from deck and show them in a json api format.
+     */
     #[Route("/api/deck/draw/{num<\d+>}", name: "card_json_draw_num", methods: ['POST'])]
     public function apiDrawCards(
         int $num,
         SessionInterface $session
     ): Response {
-        //$removedList = $session->get("cards", []);
         $deck = new DeckOfJokers();
         $placehold = $session->get("deckArray", $deck->deck);
         $deck->swapShuffle($placehold);
@@ -131,7 +140,6 @@ class CardControllerJson extends AbstractController
             $drawnCards[] = array_pop($cardArray);
             array_pop($deck->deck);
         }
-        //$drawnCard = array_pop($cardArray);
         $session->set("deckArray", $deck->deck);
         $session->set("deck", $amount);
         $data = [

@@ -6,8 +6,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class for early testing for later use in controllers.
+ */
 class LuckyController
 {
+    /**
+     * Route to show random number.
+     */
     #[Route('/lucky/number')]
     public function number(): Response
     {
@@ -17,6 +23,9 @@ class LuckyController
             '<html><body><h1>Lucky number: '.$number.'<h1></body></html>'
         );
     }
+    /**
+     * Route to show greeting.
+     */
     #[Route("/lucky/hi")]
     public function hiya(): Response
     {
@@ -24,22 +33,4 @@ class LuckyController
             '<html><body>Hi to you!</body></html>'
         );
     }
-    /*#[Route("/api/lucky/number")]
-    public function jsonNumber(): Response
-    {
-        $number = random_int(0, 100);
-
-        $data = [
-            'lucky-number' => $number,
-            'lucky-message' => 'Hi there!',
-        ];
-
-        // return new JsonResponse($data);
-
-        $response = new JsonResponse($data);
-        $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
-        );
-        return $response;
-    }*/
 }

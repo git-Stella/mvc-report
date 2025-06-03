@@ -11,8 +11,14 @@ use App\Entity\Library;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\LibraryRepository;
 
+/**
+ * Controller class for the library routes.
+ */
 final class LibraryController extends AbstractController
 {
+    /**
+     * Route for the library landing page.
+     */
     #[Route('/library', name: 'app_library')]
     public function index(): Response
     {
@@ -20,6 +26,9 @@ final class LibraryController extends AbstractController
             'controller_name' => 'Library',
         ]);
     }
+    /**
+     * Route to view all books in the library.
+     */
     #[Route('/library/view', name: 'library_view_all')]
     public function viewAllLibrary(
         LibraryRepository $libraryRepository
@@ -30,10 +39,11 @@ final class LibraryController extends AbstractController
         $data = [
             'library' => $library
         ];
-        //gotta change the view here to show a table or something
-
         return $this->render('library/view.html.twig', $data);
     }
+    /**
+     * Route to view all books in the library in a JSON api format.
+     */
     #[Route('/api/library/books', name: 'api_library')]
     public function viewApiLibrary(
         LibraryRepository $libraryRepository
@@ -49,7 +59,6 @@ final class LibraryController extends AbstractController
             $book->getIsbn() . " Image url: " .
             $book->getPicture();
         }
-        //$books[] = $library;
 
         $data = [
             'library' => $books
@@ -61,6 +70,9 @@ final class LibraryController extends AbstractController
         );
         return $response;
     }
+    /**
+     * Route to look at a specific book in JSON api format, filtered by its isbn.
+     */
     #[Route('/api/library/book/{isbn}', name: 'api_isbn')]
     public function viewApiBook(
         LibraryRepository $libraryRepository,
@@ -80,6 +92,9 @@ final class LibraryController extends AbstractController
         );
         return $response;
     }
+    /**
+     * Route to view one specific book in the library.
+     */
     #[Route('/library/one/{id}', name: 'library_view_id')]
     public function viewOneLibrary(
         LibraryRepository $libraryRepository,
@@ -94,11 +109,17 @@ final class LibraryController extends AbstractController
 
         return $this->render('library/one.html.twig', $data);
     }
+    /**
+     * Route to html form for creating a new book for the library.
+     */
     #[Route('/library/create', name: 'app_library_create', methods: ['GET'])]
     public function create_book(): Response
     {
         return $this->render('library/create.html.twig');
     }
+    /**
+     * Route to create the book based on the html form.
+     */
     #[Route('/library/create_new', name: 'post_library_create', methods: ['POST'])]
     public function create_a_book(
         Request $request,
@@ -126,6 +147,9 @@ final class LibraryController extends AbstractController
         //return $this->render('library/create.html.twig');
         return $this->redirectToRoute('library_view_all');
     }
+    /**
+     * Route for the html form to update a book.
+     */
     #[Route('/library/update/{id}', name: 'app_library_update', methods: ['GET'])]
     public function update_book(
         LibraryRepository $libraryRepository,
@@ -139,6 +163,9 @@ final class LibraryController extends AbstractController
         ];
         return $this->render('library/update.html.twig', $data);
     }
+    /**
+     * Route to update the book based on the html form in the previous route.
+     */
     #[Route('/library/update_post', name: 'post_library_update', methods: ['POST'])]
     public function update_the_book(
         //LibraryRepository $libraryRepository,
@@ -175,6 +202,9 @@ final class LibraryController extends AbstractController
         //return $this->render('library/create.html.twig');
         return $this->redirectToRoute('library_view_all');
     }
+    /**
+     * Route to for deleting a book.
+     */
     #[Route('/library/delete/{id}', name: 'app_library_delete', methods: ['GET'])]
     public function delete_book(
         LibraryRepository $libraryRepository,
@@ -188,6 +218,9 @@ final class LibraryController extends AbstractController
         ];
         return $this->render('library/delete.html.twig', $data);
     }
+    /**
+     * Route for deleting the book if it was confirmed on the previous one.
+     */
     #[Route('/library/delete_post', name: 'post_library_delete', methods: ['POST'])]
     public function delete_the_book(
         Request $request,

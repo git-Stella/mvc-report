@@ -2,12 +2,18 @@
 
 namespace App\Card;
 
+/**
+ * Class representing playing cards
+ */
 class Card
 {
     public $value;
     public $kingdom;
     public $suit;
     public $color;
+    /**
+     * Constructor method.
+     */
     public function __construct()
     {
         $this->value = null;
@@ -38,6 +44,9 @@ class Card
         ];
     }
 
+    /**
+     * Method to set value and suit on the card.
+     */
     public function setValue($val, $suit): string
     {
         $this->value = $val;
@@ -45,6 +54,9 @@ class Card
         return "$this->value and $this->suit";
     }
 
+    /**
+     * Method to get the value based on what card it is.
+     */
     public function valFromKingdom($role, $faction): string
     {
         $dict = [
@@ -68,35 +80,35 @@ class Card
         return "$this->value and $this->suit";
     }
 
+    /**
+     * Method to get value.
+     */
     public function getValue(): int
     {
         return $this->value;
     }
 
+    /**
+     * Method to get suit.
+     */
     public function getSuit(): string
     {
         return $this->suit;
     }
 
+    /**
+     * Method to get color.
+     */
     public function getColor(): string
     {
         return $this->color[$this->suit];
     }
 
+    /**
+     * Method to get what card it is.
+     */
     public function getKingdom(): string
     {
         return $this->kingdom[$this->value];
-    }
-
-    public function getCard(): string
-    {
-        $cardVal = $this->kingdom[$this->value];
-        $cardSuit = $this->color[$this->suit];
-        return "$cardSuit?$cardVal";
-    }
-
-    public function getAsString(): string
-    {
-        return "[{$this->value}]";
     }
 }

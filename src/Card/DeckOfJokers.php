@@ -2,8 +2,14 @@
 
 namespace App\Card;
 
+/**
+ * Class representing a deck of cards with jokers. Extends DeckOfCards.
+ */
 class DeckOfJokers extends DeckOfCards
 {
+    /**
+     * Constructor method.
+     */
     public function __construct()
     {
         $suits = ["hearts", "diamonds", "spades", "clubs"];
@@ -22,6 +28,9 @@ class DeckOfJokers extends DeckOfCards
         $this->deck[] = $joker1;
         $this->deck[] = $joker2;
     }
+    /**
+     * Method to sort deck.
+     */
     public function sort(): void
     {
         $newDeck = [];
@@ -47,10 +56,6 @@ class DeckOfJokers extends DeckOfCards
                 $joker[] = $card;
             }
         }
-        sort($hearts);
-        sort($diamonds);
-        sort($spades);
-        sort($clubs);
         $suits = [
             $hearts,
             $diamonds,
@@ -59,6 +64,7 @@ class DeckOfJokers extends DeckOfCards
             $joker
         ];
         foreach ($suits as $suit) {
+            sort($suit);
             foreach ($suit as $curSuit) {
                 $newDeck[] = $curSuit;
             }

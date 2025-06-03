@@ -51,7 +51,6 @@ class Player
             $val = $card->getKingdom();
             $hand[] = '[' . $suit . $val . ']';
         }
-        //$this->hand = [];
         return $hand;
     }
     /**
@@ -59,8 +58,6 @@ class Player
      */
     public function calcPoints(): array
     {
-        //$point_array = [];
-        //might redo and do simpler foreach with a foreach point_array..
         $points1 = 0;
         $points2 = 0;
         $points3 = 0;
@@ -75,9 +72,7 @@ class Player
             $val = $card->getValue() + 1;
             if ($card->getValue() == 0) {
                 $val = 14;
-            }/* else {
-                $val = $card->get_value() + 1;
-            }*/
+            }
             if ($card->getValue() == 13) {
                 $val = 0;
             }
@@ -87,9 +82,7 @@ class Player
             $val = $card->getValue() + 1;
             if ($card->getValue() == 13) {
                 $val = 15;
-            }/* else {
-                $val = $card->get_value() + 1;
-            }*/
+            }
             $points3 += $val;
         }
         $pointArray = [$points1, $points2, $points3];

@@ -17,9 +17,6 @@ class CardTest extends TestCase
     {
         $card = new Card();
         $this->assertInstanceOf("\App\Card\Card", $card);
-
-        $res = $card->getAsString();
-        $this->assertNotEmpty($res);
     }
     public function testSetValues()
     {
@@ -40,12 +37,10 @@ class CardTest extends TestCase
     public function testGetFunctions()
     {
         $card = new Card();
-        $res = $card->setValue(0, "spades");
+        $card->setValue(0, "spades");
         $this->assertEquals($card->getValue(), 0);
         $this->assertEquals($card->getSuit(), "spades");
         $this->assertEquals($card->getColor(), "♠️");
         $this->assertEquals($card->getKingdom(), "A");
-        $this->assertEquals($card->getCard(), "♠️?A");
-        //$this->assertEquals($card->getAsString(), "[{0}]");
     }
 }

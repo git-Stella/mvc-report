@@ -9,8 +9,14 @@ use App\Entity\Product;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\ProductRepository;
 
+/**
+ * Controller class for product as practice assignment for doctrine.
+ */
 final class ProductController extends AbstractController
 {
+    /**
+     * Landing page for product routes.
+     */
     #[Route('/product', name: 'app_product')]
     public function index(): Response
     {
@@ -18,6 +24,9 @@ final class ProductController extends AbstractController
             'controller_name' => 'ProductController',
         ]);
     }
+    /**
+     * Route to create a product.
+     */
     #[Route('/product/create', name: 'product_create')]
     public function createProduct(
         ManagerRegistry $doctrine
@@ -37,6 +46,9 @@ final class ProductController extends AbstractController
 
         return new Response('Saved new product with id '.$product->getId());
     }
+    /**
+     * Route to show products as json api.
+     */
     #[Route('/product/show', name: 'product_show_all')]
     public function showAllProduct(
         ProductRepository $productRepository
@@ -50,6 +62,9 @@ final class ProductController extends AbstractController
         );
         return $response;
     }
+    /**
+     * Route to show a product as json api.
+     */
     #[Route('/product/show/{id}', name: 'product_by_id')]
     public function showProductById(
         ProductRepository $productRepository,
@@ -60,6 +75,9 @@ final class ProductController extends AbstractController
 
         return $this->json($product);
     }
+    /**
+     * Route to delete a product.
+     */
     #[Route('/product/delete/{id}', name: 'product_delete_by_id')]
     public function deleteProductById(
         ManagerRegistry $doctrine,
@@ -79,6 +97,9 @@ final class ProductController extends AbstractController
 
         return $this->redirectToRoute('product_show_all');
     }
+    /**
+     * Route to update a product.
+     */
     #[Route('/product/update/{id}/{value}', name: 'product_update')]
     public function updateProduct(
         ManagerRegistry $doctrine,
@@ -99,6 +120,9 @@ final class ProductController extends AbstractController
 
         return $this->redirectToRoute('product_show_all');
     }
+    /**
+     * Route to view all products on html page.
+     */
     #[Route('/product/view', name: 'product_view_all')]
     public function viewAllProduct(
         ProductRepository $productRepository
@@ -111,6 +135,9 @@ final class ProductController extends AbstractController
 
         return $this->render('product/view.html.twig', $data);
     }
+    /**
+     * Route to view a specific product on html page.
+     */
     #[Route('/product/view/{value}', name: 'product_view_minimum_value')]
     public function viewProductWithMinimumValue(
         ProductRepository $productRepository,
@@ -124,6 +151,9 @@ final class ProductController extends AbstractController
 
         return $this->render('product/view.html.twig', $data);
     }
+    /**
+     * Route to show product which has at least the value searched for.
+     */
     #[Route('/product/show/min/{value}', name: 'product_by_min_value')]
     public function showProductByMinimumValue(
         ProductRepository $productRepository,

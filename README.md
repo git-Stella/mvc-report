@@ -25,3 +25,8 @@ symfony server:ca:install
 Hur gör du nu?:
 Du kan nu använda symfony server:start för att starta servern.
 Om du är en bth student eller annars har tillgång till dbwebb och vill kunna göra dbwebb publish så måste du även redigera filväg i .httaccess så den är korrekt samt använder din acronym.
+
+Badges:
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/git-Stella/mvc-report/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/git-Stella/mvc-report/?branch=main)
+[![Code Coverage](https://scrutinizer-ci.com/g/git-Stella/mvc-report/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/git-Stella/mvc-report/?branch=main)
+[![Build Status](https://scrutinizer-ci.com/g/git-Stella/mvc-report/badges/build.png?b=main)](https://scrutinizer-ci.com/g/git-Stella/mvc-report/build-status/main)

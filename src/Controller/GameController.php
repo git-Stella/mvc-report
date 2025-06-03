@@ -7,35 +7,35 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Card\Card;
-//use App\Card\CardGraphic;
-use App\Card\DeckOfCards;
 use App\Card\DeckOfJokers;
 use App\Game\Player;
 use App\Game\Bank;
-//use App\Dice\DiceHand;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-//put version of deck with jokers in json api...
 /**
  * Controller for the game in kmom03
  */
 class GameController extends AbstractController
 {
+    /**
+     * Route to start the game and explain the rules of it.
+     */
     #[Route("/game", name: "game_start")]
-    public function home(
-        SessionInterface $session
-    ): Response {
-        //put in a continue button somewhere if session not empty...
-        //in home
-        //need to grab session data?
+    public function home(): Response {
         return $this->render('game/home.html.twig');
     }
+    /**
+     * Route to documentation of the game.
+     */
     #[Route("/game/doc", name: "game_doc")]
     public function doc(): Response
     {
         return $this->render('game/doc.html.twig');
     }
+    /**
+     * Route for new game starting up for real.
+     */
     #[Route("/game/new", name: "game_new")]
     public function playerTurn(
         SessionInterface $session
@@ -53,16 +53,13 @@ class GameController extends AbstractController
 
         $session->set("bankHand", $bank->hand);
 
-        //$session->set("playerScore", 0);
-
-        //$session->set("bankScore", 0);
-
         $session->set("playerPoints", 0);
-
-        //$session->set("bankPoints", 0);
 
         return $this->render('game/new.html.twig');
     }
+    /**
+     * Route to clear the session.
+     */
     #[Route("/game/clear", name: "game_clear")]
     public function restartGame(
         SessionInterface $session
@@ -74,6 +71,9 @@ class GameController extends AbstractController
         );
         return $this->redirectToRoute('game_start');
     }
+    /**
+     * Route for the player to draw a card.
+     */
     #[Route("/game/draw", name: "game_draw")]
     public function playerDraw(
         SessionInterface $session
@@ -88,12 +88,11 @@ class GameController extends AbstractController
         $session->set("deck", count($deck->deck));
         $session->set("playerHand", $player->hand);
 
-        /*$data = [
-            "hand" => $player->showHand()
-        ];*/
-
         return $this->redirect('gamestate');
     }
+    /**
+     * Route showing the current gamestate.
+     */
     #[Route("/game/gamestate", name: "game_state")]
     public function gameState(
         SessionInterface $session
@@ -106,16 +105,19 @@ class GameController extends AbstractController
         ];
         return $this->render('game/gamestate.html.twig', $data);
     }
+    /**
+     * Route setting player points before redirecting to the bank's turn.
+     */
     #[Route("/game/satisfaction", name: "game_satisfaction", methods: ['POST'])]
     public function teamSatisfaction(
         SessionInterface $session
     ): Response {
-        //need this to add player score then redirect to game/vs
-        //redirect it differently if the number is above 21 already...
-        //turn this into an int below:
         $session->set("playerPoints", $_POST["selector"]);
         return $this->redirect('vs');
     }
+    /**
+     * Route for the bank's turn and calculating who won.
+     */
     #[Route("/game/vs", name: "game_vs")]
     public function fight(
         SessionInterface $session
@@ -131,13 +133,6 @@ class GameController extends AbstractController
         $session->set("deck", count($deck->deck));
         $session->set("bankHand", $bank->hand);
         $pPoints = $session->get("playerPoints", 0);
-        //$bankPoints = $bank->calcPoints();
-
-        //get which bank points used ideally
-        //compare to player points
-        //add flash based on who wins
-        //add a <h1> with extra class for color based on winner...
-        //button to restart below
 
         $bankPoints = $bank->pickPoints();
 
@@ -175,6 +170,9 @@ class GameController extends AbstractController
 
         return $this->render('game/clash.html.twig', $data);
     }
+    /**
+     * Route showing the current gamestate as JSON api.
+     */
     #[Route("/api/game", name: "game_api")]
     public function apiGame(
         SessionInterface $session
@@ -203,16 +201,10 @@ class GameController extends AbstractController
         );
         return $response;
     }
-    /*#[Route("/game/final", name: "game_final")]
-    public function finale(
-        SessionInterface $session
-    ): Response {
-        //just gotta finish up the final one for the reset...
-        $pScore = $session->get("playerScore", 0);
-        $bScore = $session->get("bankScore", 0);
-        return $this->redirect('game_new');
-    }*/
-    #[Route("/game/test", name: "game_test")]
+    /**
+     * Route to test various functions. Comment out if needed.
+     */
+    /*#[Route("/game/test", name: "game_test")]
     public function testinger(): Response
     {
         $bank = new Bank();
@@ -232,5 +224,5 @@ class GameController extends AbstractController
             "deckNum" => $deck->getNumberCards()
         ];
         return $this->render('game/test.html.twig', $data);
-    }
+    }*/
 }

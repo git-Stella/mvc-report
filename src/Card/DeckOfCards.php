@@ -4,10 +4,16 @@ namespace App\Card;
 
 use App\Card\Card;
 
+/**
+ * Class representing a deck of cards.
+ */
 class DeckOfCards
 {
     public $deck = [];
 
+    /**
+     * Constructor method.
+     */
     public function __construct()
     {
         $suits = ["hearts", "diamonds", "spades", "clubs"];
@@ -21,15 +27,19 @@ class DeckOfCards
         }
     }
 
+    /**
+     * Method to get shuffle deck.
+     */
     public function shuffle(): void
     {
         $deckArray = $this->deck;
-        //print($deckArray[0]);
         shuffle($deckArray);
-        //shuffle($this->deck);
         $this->deck = $deckArray;
     }
 
+    /**
+     * Method to get sort deck.
+     */
     public function sort(): void
     {
         $newDeck = [];
@@ -52,10 +62,6 @@ class DeckOfCards
                 $clubs[] = $card;
             }
         }
-        sort($hearts);
-        sort($diamonds);
-        sort($spades);
-        sort($clubs);
         $suits = [
             $hearts,
             $diamonds,
@@ -64,6 +70,7 @@ class DeckOfCards
             $joker
         ];
         foreach ($suits as $suit) {
+            sort($suit);
             foreach ($suit as $curSuit) {
                 $newDeck[] = $curSuit;
             }
@@ -71,16 +78,25 @@ class DeckOfCards
         $this->deck = $newDeck;
     }
 
+    /**
+     * Method to swap the cards in deck for an array of cards.
+     */
     public function swapShuffle($deckArray): void
     {
         $this->deck = $deckArray;
     }
 
+    /**
+     * Method to add card to deck.
+     */
     public function add(Card $card): void
     {
         $this->deck[] = $card;
     }
 
+    /**
+     * Method to remove a card from deck.
+     */
     public function remove(string $str): void
     {
         $counter = 0;
@@ -93,11 +109,17 @@ class DeckOfCards
         }
     }
 
+    /**
+     * Method to get the number of cards in deck.
+     */
     public function getNumberCards(): int
     {
         return count($this->deck);
     }
 
+    /**
+     * Method to return all cards in the deck as an array of strings with suit and value.
+     */
     public function returnDeck(): array
     {
         $cardArray = [];
@@ -109,28 +131,9 @@ class DeckOfCards
         return $cardArray;
     }
 
-    /*public function getValues(): array
-    {
-        //$values = [];
-        //$suits = [];
-        $returner = [];
-        foreach ($this->deck as $card) {
-            $returner[] = $card->getKingdom() . "-" . $card->getSuit();
-            //$suits[] = $card->getSuit();
-        }
-        //$returner = [$values, $suits];
-        return $returner;
-    }
-
-    public function getString(): array
-    {
-        $values = [];
-        foreach ($this->deck as $card) {
-            $values[] = $card->getAsString();
-        }
-        return $values;
-    }*/
-
+    /**
+     * Method to draw cards from deck.
+     */
     public function draw($num): array
     {
         $drawnCards = [];

@@ -7,8 +7,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Controller class for json api routes
+ */
 class ControllerJson extends AbstractController
 {
+    /**
+     * Route that has links to several json api routes.
+     */
     #[Route("/api/api", name: "apiapi")]
     public function apiLanding(): Response
     {
@@ -31,11 +37,17 @@ class ControllerJson extends AbstractController
         );
         return $response;
     }
+    /**
+     * Route to api routes landing page with links to all the other api routes.
+     */
     #[Route("/api", name: "api")]
     public function apiLand(): Response
     {
         return $this->render('api.html.twig');
     }
+    /**
+     * Route to show a random number in json api format.
+     */
     #[Route("/api/lucky/number", name: "api_luck_num")]
     public function jsonNumber(): Response
     {
@@ -46,14 +58,15 @@ class ControllerJson extends AbstractController
             'lucky-message' => 'Hi there!',
         ];
 
-        // return new JsonResponse($data);
-
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
         return $response;
     }
+    /**
+     * Route to show one of a few random quotes in a json api format.
+     */
     #[Route("/api/quote", name: "quote")]
     public function quote(): Response
     {
@@ -73,7 +86,6 @@ class ControllerJson extends AbstractController
             'time' => date("H:i:s")
         ];
 
-        //return $this->render('lucky_number.html.twig', $data);
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
