@@ -46,16 +46,17 @@
     <h1>PHPmetrics</h1>
     <p>
         <img src="{{ asset('img/phpmetricsmaintain.png') }}" alt="Maintenance">
-        Främsta problemen som dyker up är stor komplexitet i vissa filer. Till exempel så har min DeckOfCards klass ganska hög cyclomatic complexity på 14. 
+        <p>Främsta problemen som dyker up är stor komplexitet i vissa filer. Till exempel så har min DeckOfCards klass ganska hög cyclomatic complexity på 14. 
+        </p>
         <img src="{{ asset('img/metricscards.webp') }}" alt="DeckOfCardsStatistics"> 
-        Det är också dåligt på maintainability index för flera av mina filer, särskilt utan kommentarer: 
+        <p>Det är också dåligt på maintainability index för flera av mina filer, särskilt utan kommentarer: </p>
         <img src="{{ asset('img/phpmetricsmaintainnocom.png') }}" alt="Maintenance without comments">
-        Utöver det så saknar även mina controllers cohesion mellan sina metoder i många fall. 
+        <p>Utöver det så saknar även mina controllers cohesion mellan sina metoder i många fall. 
         Flera av routes fungerar väldigt olika och därmed gör cohesion mycket lägre. De har även i flera fall hög coupling då flera av mina controllers använder sig av många externa klasser. 
         Till exempel GameController har väldigt låg cohesion mellan sina metoder (LCOM=3). Den är också komplex och har stort antal metoder som teoretiskt hade kunnat trimmas, men då detta är för att kunna använda sig av POST för att göra ändringar i databasen 
         så tror jag den är bäst att lämna som den är. 
         För att summera så är complexity och och coupling ganska hög i många filer, till exempel DeckOfCards har mycket hög complexity, cohesion är relativt låg i många filer. De mest komplicerade metoderna har bra test coverage vilket 
-        hjälper hålla CRAP score nere. 
+        hjälper hålla CRAP score nere. </p>
         <img src="{{ asset('img/phpmetricsdata.webp') }}" alt="Data">
     </p>
 
@@ -75,10 +76,12 @@
         doctrine eller inom filer vi laddade ner. Men för något specifikt som vore bra att justera så är det problem med dokumentationen till ProductRepository documentationen står det att den returnar 
         [][] vilket inte är rätt sätt att skriva. Det ska stå att en array returneras. 
         <img src="{{ asset('img/scrutinizerissues.webp') }}" alt="Issues">
-        Går jag in på sidan om kod så syns det att flera av mina filer har relativt stor kod komplexitet. DeckOfCards den värsta med 22 complexity, den har däremot 100% code coverage. 
+        <p>Går jag in på sidan om kod så syns det att flera av mina filer har relativt stor kod komplexitet. DeckOfCards den värsta med 22 complexity, den har däremot 100% code coverage. 
         I överlag så ser det som scrutinizer kollar på ganska bra ut. Har visst problem med relativt hög complexity i vissa filer dock. 
+        </p>
         <img src="{{ asset('img/scrutinizerpage1.webp') }}" alt="Some file examples">
-        Däremot anser scrutinizer att min kod är väldigt bra och hittar inte många stora problem. Men många av mina controllers har hög CRAP score då de inte täcks av testerna. 
+        <p>Däremot anser scrutinizer att min kod är väldigt bra och hittar inte många stora problem. Men många av mina controllers har hög CRAP score då de inte täcks av testerna. 
+        </p>
     </p>
     <img src="{{ asset('img/scrutinizerstats.webp') }}" alt="Very good"> 
     <p>
@@ -96,11 +99,58 @@
         Så jag tänker fokusera på att fixa några små problem med koden, göra några filer som till exempel DeckOfCards simplare och minska storleken på flera filer. Utöver det vill jag även öka maintainability, kan bland annat lägga till bättre kommentering för att öka det. 
         Jag tänkte öka coverage men att testa repository och entity med enhetstestning fick jag inte riktigt att fungera, och samma med mina controllers. Jag valde även att inte försöka fixa problem i kod från övningarna eller som genereras av doctrine. 
         Det jag valde att göra var att fokusera på att göra små kod fixar samt att öka maintainability i min kod genom att lägga till bättre dokumentering i mina controllers och andra klasser. 
-        Jag minskar också komplexitetet i flera klasser genom att ta bort delar som inte används eller förenkla vissa metoder. Bland annat gör jag några ändringar i DeckOfCards. 
+        Jag minskar också komplexitetet i flera klasser genom att ta bort delar som inte används eller förenkla vissa metoder. Bland annat gör jag några ändringar i Cards som att ta bort "getAsString" och "getCard" metoder då jag aldrig använder dem. 
+
+    </p>
+    <p>
+        Efter jag genomförde mina ändringar så har jag dessvärre inte uppnåt särskilt stor skillnad i scrutinizer, det är lite större i vad phpmetrics visar som jag ska gå in på senare. 
+        Bland annat så har jag samma score på min kod fortfarande, den var dock väldigt hög med allting som "A" förutom tre metoder som var "B" så det kanske inte gör så mycket, men jag hade hoppats få upp det genom att justera dem lite men ändringarna var nog inte stora nog. 
+        <h2>Före-efter</h2>
+        <img src="{{ asset('img/scrutinizerstats.webp') }}" alt="Very good"> 
+        <img src="{{ asset('img/scrutinizerscorefix.webp') }}" alt="Very good">
+        <p>
+        Jag fick ner LOC i dem men deras complexity har inte sänkts. De fungerar fortfarande ganska liknande. 
+        Jag har lyckats fixa de issues som fanns i filer som jag själv gjort, så inte de skapade av doctrine till exempel. </p>
+        <img src="{{ asset('img/scrutinizerissues.webp') }}" alt="Issues"> 
+        <img src="{{ asset('img/scrutinizerissuesfix.webp') }}" alt="Issues fixed"> 
+        <p>Det ser lite bättre ut om vi kollar på maintainability index i phpmetrics däremot. 
+        </p>
+        <h2>Före</h2>
+        <img src="{{ asset('img/phpmetricsmaintain.png') }}" alt="Maintenance">
+        <h2>Efter</h2>
+        <img src="{{ asset('img/phpmetricsmaintainpost.png') }}" alt="After comments were expanded">
+        <p>Färgen visar hur hög maintainability en klass har medans storleken på cirklarna visar hur komplex koden är. Som det syns tydligt på bilderna så har maintainability ökat mycket 
+        på grund av det bättre kommentarerna som gör det tydligare vad olika delar av koden är till för. Så trots att jag misslyckades med mitt mål att minska komplexitetet så jar jag höjt min maintainability, vilket var ett av mina mål. 
+        Jag har även fixat några små problem, så det var också positivt. </p>
+        Däremot så en oföruttsed sido effekt av mina försök att minska komplexitet genom att ta bort oanvända metoder och trimma kod som inte används är att min coverage har gått ner. 
+        <h2>Innan</h2>
+        <img src="{{ asset('img/phpmetricscoverage.webp') }}" alt="Coverage pre"> 
+        <h2>Efter</h2>
+        <img src="{{ asset('img/phpmetricscoveragedown.webp') }}" alt="Coverage down"> 
+        <h2>Förändring</h2>
+        <img src="{{ asset('img/scrutinizercoveragechange.webp') }}" alt="Coverage change"> 
+        <p>Egentligen testas lika mycket som faktiskt används men procenten av koden som testas har gått ner. Så egentliga effekten är inte annorlunda, om jag hade fått det att fungera med att testa på koden som doctrine genererar 
+        så hade jag nog kunnat öka coverage ganska mycket men jag fick det inte att fungera med hur enhetstesterna fungerar. </p>
     </p>
 
     <h1>Diskussion</h1>
+    <h2>Kan man aktivt jobba med kodkvalitet och “clean code” på detta sättet?</h2>
     <p>
-
+        Definitivt. Phpmetrics och scrutinizer ger väldigt mycket information, på mer detalj än vad jag väntade mig. Men det kan vara lite svårt att navigera fram till den. 
+        Men bara att kunna se den feedbacken gör det mycket enklare att få en överblick på vart man kan göra förbättringar och vilken typ av förbättringar. 
+        Om man lyckas få till det bra med clean code gör det också saken enklare för andra personer att kunna arbeta med koden senare. 
+    </p>
+    <h2>Finns det fördelar och kanske nackdelar?</h2>
+    <p>
+        En nackdel tycker jag är att det är lite otydligt hur stor påverkan olika förändringar kan ha och hur viktigt olika problem som visas är. 
+        Däremot så tror jag att fördelarna av att få en så tydlig överblick på troliga problem och var i koden de ligger är en stor nog fördel att överväga det. 
+        Det kanske inte ger lika stor inblick i hur väl koden faktiskt fungerar, mycket behöver vara någorlunda komplicerat för att göra det som behövs. 
+        Men det kan ändå vara bra att ha tillgång till den här information för att kunna göra justeringar där det är möjligt.
+    </p>
+    <h2>Ser du andra möjligheter att jobba mot “clean code”?</h2>
+    <p>
+        Jag skulle kunna tänka mig att en bra idé vore kanske att försöka jobba med det i åtanke till att börja med. Och att stegvis allt mer av koden skrivs man kollar hur bra den är i och med clean code 
+        så att man kan alltid justera den så att den följer det. Sättet vi jobbade med den var ju mer att försöka justera koden att följa det i efterhand, vilket för min del gjorde mig 
+        mindre villig att helt enkelt skriva om funktioner så de fungerar helt annorlunda än vad jag tror jag hade varit annars, då jag ville undvika att bryta något. 
     </p>
 {% endblock %}

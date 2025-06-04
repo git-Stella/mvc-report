@@ -22,7 +22,8 @@ class GameController extends AbstractController
      * Route to start the game and explain the rules of it.
      */
     #[Route("/game", name: "game_start")]
-    public function home(): Response {
+    public function home(): Response
+    {
         return $this->render('game/home.html.twig');
     }
     /**
