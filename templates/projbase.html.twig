@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="{{ asset('img/glider.svg') }}">        
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <container class="box">
+        <header class="blackred">
+            <span class="site-title">Poker casino</span>
+            <nav>
+                <ul>
+                    <li><a href="{{ path('home') }}">Home</a></li>
+                    <li><a href="{{ path('proj') }}">Home</a></li>
+                    <li><a href="{{ path('projabout') }}">About</a></li>
+                </ul>
+            </nav>
+        </header>
+        <body class="flesh">
+            {% block body %}{% endblock %}
+        </body>
+        <footer class="foot">
+            <a href="https://github.com/git-Stella/mvc-report">Repo för denna sida</a>
+            <p>Projekt för mvc kurs på bth gjord av Stella Karlsson</p>
+        </footer>
+    </container>
+</html>
