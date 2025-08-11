@@ -21,10 +21,14 @@
                     <li><a href="{{ path('home') }}">Home</a></li>
                     <li><a href="{{ path('proj') }}">Home</a></li>
                     <li><a href="{{ path('projabout') }}">About</a></li>
+                    <li><a href="{{ path('projtest') }}">Test</a></li>
+                    <li><a href="{{ path('projreset') }}">Reset</a></li>
+                    <li><a href="{{ path('projstate') }}">Gamestate</a></li>
                 </ul>
             </nav>
         </header>
         <body class="flesh">
+            {{ include('flash.html.twig') }}
             {% block body %}{% endblock %}
         </body>
         <footer class="foot">

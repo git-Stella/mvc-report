@@ -1,0 +1,26 @@
+{% extends "projbase.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <h1>Stella Karlsson</h1>
+    <p>
+    {% for i in range(0, deck|length-1) %}
+        {{ deck[i] }}
+    {% endfor %}
+    </p>
+    <p>
+        {% for i in range(0, hand|length-1) %}
+            {{ hand[i] }}
+        {% endfor %}
+    </p>
+    <p>
+        {% for i in range(0, cHand|length-1) %}
+            {{ cHand[i] }}
+        {% endfor %}
+    </p>
+    <form action="{{ path('projdraw') }}" method="POST">
+        <button type="submit" value="Val">Dra kort</button>
+    </form>
+
+{% endblock %}

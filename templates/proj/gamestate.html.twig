@@ -1,0 +1,38 @@
+{% extends "projbase.html.twig" %}
+
+{% block title %}Card Game{% endblock %}
+
+{% block body %}
+<h1>Poker</h1>
+
+<p>5 card poker</p>
+{{ include('flash.html.twig') }}
+
+{% if time == 0 %}
+    <h1>Raise?</h1>
+    <form action="{{ path('projround') }}" method="POST">
+        <input type="hidden" id="stage" name="stage" value={{ time }}>
+        <label for="num">Bet?</label>
+        <input type="number" id="num" name="num" min={{ score }}>
+        <button type="submit" value="Val">Call</button>
+    </form>
+{% endif %}
+{% if time == 1 %}
+    <form action="{{ path('projdraw') }}" method="POST">
+        <input type="hidden" id="stage" name="stage" value={{ time }}>
+        <label for="draw">Draw?</label>
+        <input type="number" id="draw" name="draw" min=0 max=3>
+        <button type="submit" value="Val">Draw</button>
+    </form>
+{% endif %}
+{% if time == 2 %}
+    <p>Hej</p>
+{% endif %}
+<h2>My hand</h2>
+<p>
+    {% for i in range(0, playerHand|length-1) %}
+        {{ playerHand[i] }}
+    {% endfor %}
+</p>
+
+{% endblock %}

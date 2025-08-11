@@ -95,7 +95,7 @@ class DeckOfCards
     }
 
     /**
-     * Method to remove a card from deck.
+     * Method to remove a card from deck based on string.
      */
     public function remove(string $str): void
     {

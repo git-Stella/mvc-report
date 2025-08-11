@@ -4,8 +4,8 @@
 
 {% block body %}
     <h1>Stella Karlsson</h1>
-    <p>
-        Testar
-    </p>
+    {% for i in range(0, deck|length-1) %}
+        {{ deck[i] }}
+    {% endfor %}
 
 {% endblock %}
