@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Card\Card;
 use App\Card\DeckOfCards;
+use App\Poker\Rules;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -21,8 +22,7 @@ class ProjectController extends AbstractController
     #[Route("/proj", name: "proj")]
     public function projHome(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         if (null === $session->get("playerHand")) {
             $session->set("playerHand", []);
         }
@@ -60,8 +60,7 @@ class ProjectController extends AbstractController
     #[Route("/proj/test", name: "projtest")]
     public function projTest(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         //make the session affect the hand...
         if (null === $session->get("playerHand")) {
             $session->set("playerHand", []);
@@ -109,6 +108,7 @@ class ProjectController extends AbstractController
         );
         return $this->redirectToRoute('proj');
     }
+    //have so this is only accessed via the start page first
     #[Route("/proj/gamestate", name: "projstate")]
     public function projGamestate(
         SessionInterface $session
@@ -127,6 +127,8 @@ class ProjectController extends AbstractController
         if (null !== $session->get("deck")) {
             $deck->swapShuffle($session->get("deck"));
         }
+        //since this uses the deck session it can have the wrong type if I went from game...
+        //gotta make sure it sets right type of deck
         $temp1 = $deck->draw(5);
         foreach ($temp1 as $card) {
             $suit = $card->getColor();

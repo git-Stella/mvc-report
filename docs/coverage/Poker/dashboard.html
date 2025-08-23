@@ -2,7 +2,7 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Dashboard for /home/stelladess/dbwebb-kurser/mvc/me/report/src/Game</title>
+  <title>Dashboard for /home/stelladess/dbwebb-kurser/mvc/me/report/src/Poker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../_css/bootstrap.min.css?v=9.2.32" rel="stylesheet" type="text/css">
   <link href="../_css/nv.d3.min.css?v=9.2.32" rel="stylesheet" type="text/css">
@@ -17,7 +17,7 @@
       <nav aria-label="breadcrumb">
        <ol class="breadcrumb">
          <li class="breadcrumb-item"><a href="../index.html">/home/stelladess/dbwebb-kurser/mvc/me/report/src</a></li>
-         <li class="breadcrumb-item"><a href="index.html">Game</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Poker</a></li>
          <li class="breadcrumb-item active">(Dashboard)</li>
 
        </ol>
@@ -58,6 +58,7 @@
         </tr>
        </thead>
        <tbody>
+       <tr><td><a href="Players.php.html#12">App\Poker\Players</a></td><td class="text-right">9%</td></tr>
 
        </tbody>
       </table>
@@ -74,6 +75,7 @@
         </tr>
        </thead>
        <tbody>
+       <tr><td><a href="Players.php.html#12">App\Poker\Players</a></td><td class="text-right">887</td></tr>
 
        </tbody>
       </table>
@@ -111,6 +113,13 @@
         </tr>
        </thead>
        <tbody>
+       <tr><td><a href="Players.php.html#43"><abbr title="App\Poker\Players::handLogic">handLogic</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Players.php.html#67"><abbr title="App\Poker\Players::suitLogic">suitLogic</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Players.php.html#89"><abbr title="App\Poker\Players::valLogic">valLogic</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Players.php.html#131"><abbr title="App\Poker\Players::bet">bet</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Players.php.html#163"><abbr title="App\Poker\Players::score">score</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Players.php.html#196"><abbr title="App\Poker\Players::scoring">scoring</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Rules.php.html#38"><abbr title="App\Poker\Rules::handPoints">handPoints</abbr></a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -127,6 +136,13 @@
         </tr>
        </thead>
        <tbody>
+       <tr><td><a href="Players.php.html#89"><abbr title="App\Poker\Players::valLogic">valLogic</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Players.php.html#163"><abbr title="App\Poker\Players::score">score</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Players.php.html#131"><abbr title="App\Poker\Players::bet">bet</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Players.php.html#67"><abbr title="App\Poker\Players::suitLogic">suitLogic</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Players.php.html#43"><abbr title="App\Poker\Players::handLogic">handLogic</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Players.php.html#196"><abbr title="App\Poker\Players::scoring">scoring</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Rules.php.html#38"><abbr title="App\Poker\Rules::handPoints">handPoints</abbr></a></td><td class="text-right">12</td></tr>
 
        </tbody>
       </table>
@@ -155,7 +171,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#classCoverageDistribution svg')
-      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,2], "Class Coverage"))
+      .datum(getCoverageDistributionData([0,1,0,0,0,0,0,0,0,0,1,0], "Class Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -173,7 +189,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#methodCoverageDistribution svg')
-      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,10], "Method Coverage"))
+      .datum(getCoverageDistributionData([7,0,0,0,0,0,0,0,0,0,1,12], "Method Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -223,7 +239,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[100,12,"<a href=\"Bank.php.html#11\">App\\Game\\Bank<\/a>"],[100,15,"<a href=\"Player.php.html#11\">App\\Game\\Player<\/a>"]], 'Class Complexity'))
+      .datum(getComplexityData([[9.615384615384617,34,"<a href=\"Players.php.html#12\">App\\Poker\\Players<\/a>"],[94.0677966101695,44,"<a href=\"Rules.php.html#11\">App\\Poker\\Rules<\/a>"]], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -247,7 +263,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[100,1,"<a href=\"Bank.php.html#17\">App\\Game\\Bank::__construct<\/a>"],[100,5,"<a href=\"Bank.php.html#24\">App\\Game\\Bank::draw<\/a>"],[100,3,"<a href=\"Bank.php.html#57\">App\\Game\\Bank::drawCards<\/a>"],[100,3,"<a href=\"Bank.php.html#76\">App\\Game\\Bank::pickPoints<\/a>"],[100,1,"<a href=\"Player.php.html#17\">App\\Game\\Player::__construct<\/a>"],[100,1,"<a href=\"Player.php.html#24\">App\\Game\\Player::draw<\/a>"],[100,2,"<a href=\"Player.php.html#32\">App\\Game\\Player::playHand<\/a>"],[100,2,"<a href=\"Player.php.html#46\">App\\Game\\Player::showHand<\/a>"],[100,8,"<a href=\"Player.php.html#59\">App\\Game\\Player::calcPoints<\/a>"],[100,1,"<a href=\"Player.php.html#94\">App\\Game\\Player::drawCard<\/a>"]], 'Method Complexity'))
+      .datum(getComplexityData([[100,1,"<a href=\"Players.php.html#27\">App\\Poker\\Players::__construct<\/a>"],[0,3,"<a href=\"Players.php.html#43\">App\\Poker\\Players::handLogic<\/a>"],[0,5,"<a href=\"Players.php.html#67\">App\\Poker\\Players::suitLogic<\/a>"],[0,9,"<a href=\"Players.php.html#89\">App\\Poker\\Players::valLogic<\/a>"],[0,6,"<a href=\"Players.php.html#131\">App\\Poker\\Players::bet<\/a>"],[0,7,"<a href=\"Players.php.html#163\">App\\Poker\\Players::score<\/a>"],[0,3,"<a href=\"Players.php.html#196\">App\\Poker\\Players::scoring<\/a>"],[100,1,"<a href=\"Rules.php.html#18\">App\\Poker\\Rules::__construct<\/a>"],[0,3,"<a href=\"Rules.php.html#38\">App\\Poker\\Rules::handPoints<\/a>"],[100,1,"<a href=\"Rules.php.html#53\">App\\Poker\\Rules::rulesWheel<\/a>"],[100,5,"<a href=\"Rules.php.html#73\">App\\Poker\\Rules::royalFlush<\/a>"],[90.9090909090909,5,"<a href=\"Rules.php.html#96\">App\\Poker\\Rules::straightFlush<\/a>"],[100,4,"<a href=\"Rules.php.html#118\">App\\Poker\\Rules::fourOfAKind<\/a>"],[100,3,"<a href=\"Rules.php.html#138\">App\\Poker\\Rules::fullHouse<\/a>"],[100,3,"<a href=\"Rules.php.html#156\">App\\Poker\\Rules::flush<\/a>"],[100,5,"<a href=\"Rules.php.html#171\">App\\Poker\\Rules::straight<\/a>"],[100,4,"<a href=\"Rules.php.html#199\">App\\Poker\\Rules::threeOfAKind<\/a>"],[100,5,"<a href=\"Rules.php.html#219\">App\\Poker\\Rules::twoPair<\/a>"],[100,4,"<a href=\"Rules.php.html#241\">App\\Poker\\Rules::onePair<\/a>"],[100,1,"<a href=\"Rules.php.html#259\">App\\Poker\\Rules::highCard<\/a>"]], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);
