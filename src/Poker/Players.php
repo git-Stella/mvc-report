@@ -58,7 +58,10 @@ class Players
         if ($maxSuit < $maxVal) {
             $deck->deck = $this->valLogic($this->cHand, $valKey, $deck);
         }
-        $deck->deck = $this->suitLogic($this->cHand, $suitKey, $deck);
+        if ($maxVal < $maxSuit) {
+            $deck->deck = $this->suitLogic($this->cHand, $suitKey, $deck);
+        }
+        //$deck->deck = $this->suitLogic($this->cHand, $suitKey, $deck);
         return $deck;
     }
     /**
@@ -158,7 +161,7 @@ class Players
         return $message;
     }
     /**
-     * Method to determine the winner of a round.
+     * Method to determine the winner of a round, used inside clash.
      */
     public function score($rules)
     {
@@ -191,19 +194,115 @@ class Players
     }
     //must check if they got a tie which has higher value...
     /**
-     * Bla bla
+     * Method to decide who wins.
      */
-    public function scoring()
+    public function clash()
     {
         $result = $this->score($this->rules);
+        $this->round += 1;
         if ($result == "playerWin") {
             return "Player won!";
         }
         if ($result == "computerWin") {
             return "Computer won!";
         }
+        return $this->resolveEqual();
+    }
+    /**
+     * Method to resolve same hands.
+     */
+    public function resolveEqual()
+    {
         //check which hand has higher value card or higher value suit
         //give win to them
         //but if it pair I will need to check if the pair is higher
+        $pHand = $this->rules->handPoints($this->pHand);
+        $cHand = $this->rules->handPoints($this->cHand);
+        //test four and three of a kind and pair
+        $pVals = [];
+        $cVals = [];
+        $pSuits = [];
+        $cSuits = [];
+        for ($i = 0; $i < 5; $i++) {
+            $pVals[] = $this->pHand[$i]->value;
+            $cVals[] = $this->cHand[$i]->value;
+            $pSuits[] = $this->pHand[$i]->suit;
+            $cSuits[] = $this->cHand[$i]->suit;
+        }
+        rsort($pVals);
+        rsort($cVals);
+        $pMax = max(array_count_values($pVals));
+        $cMax = max(array_count_values($cVals));
+        $pValue = array_search($pMax, $pVals);
+        $cValue = array_search($cMax, $cVals);
+        if ($pHand == "Four of a Kind") {
+            if ($pValue > $cValue) {
+                $this->playerScore += 1;
+                return "Player won!";
+            }
+            $this->computerScore += 1;
+            return "Computer won!";
+        }
+        if ($pHand == "Three of a Kind") {
+            if ($pValue > $cValue) {
+                $this->playerScore += 1;
+                return "Player won!";
+            }
+            $this->computerScore += 1;
+            return "Computer won!";
+        }
+        if ($pHand == "Two Pair") {
+            if ($pValue > $cValue) {
+                $this->playerScore += 1;
+                return "Player won!";
+            }
+            $this->computerScore += 1;
+            return "Computer won!";
+        }
+        if ($pHand == "One Pair") {
+            if ($pValue > $cValue) {
+                $this->playerScore += 1;
+                return "Player won!";
+            }
+            $this->computerScore += 1;
+            return "Computer won!";
+        }
+        //test the suit if flush, royal flush, straight flush
+        $suits = ["hearts", "spades", "diamonds", "clubs"];
+        $pSuit = array_search($pSuits[0], $suits);
+        $cSuit = array_search($cSuits[0], $suits);
+        if ($pHand == "Flush") {
+            if ($pSuit > $cSuit) {
+                $this->playerScore += 1;
+                return "Player won!";
+            }
+            $this->computerScore += 1;
+            return "Computer won!";
+        }
+        if ($pHand == "Royal Flush") {
+            if ($pSuit > $cSuit) {
+                $this->playerScore += 1;
+                return "Player won!";
+            }
+            $this->computerScore += 1;
+            return "Computer won!";
+        }
+        if ($pHand == "Straight Flush") {
+            if ($pSuit > $cSuit) {
+                $this->playerScore += 1;
+                return "Player won!";
+            }
+            $this->computerScore += 1;
+            return "Computer won!";
+        }
+        //check highest value card and if they same go by suit
+        //this is only for straight and high card
+        $pHigh = max($pVals);
+        $cHigh = max($cVals);
+        if ($pHigh > $cHigh) {
+            $this->playerScore += 1;
+            return "Player won!";
+        }
+        return "Computer won!";
     }
 }

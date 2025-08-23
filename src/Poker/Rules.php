@@ -33,7 +33,7 @@ class Rules
         $this->points = 0;
     }
     /**
-     * Method to decide which points method to use
+     * Method to return which rule hand matches.
      */
     public function handPoints($cards)
     {
@@ -49,7 +49,9 @@ class Rules
         }
         return "error";
     }
-
+    /**
+     * Method to decide which points method to use.
+     */
     public function rulesWheel($num, $hand)
     {
         $dict = [
