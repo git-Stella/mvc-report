@@ -62,7 +62,7 @@ class Players
             $deck->deck = $this->suitLogic($this->cHand, $suitKey, $deck);
         }
         //$deck->deck = $this->suitLogic($this->cHand, $suitKey, $deck);
-        return $deck;
+        return $deck->deck;
     }
     /**
      * Method to handle the logic if computer has lots of cards of the same suit.
@@ -84,7 +84,7 @@ class Players
             }
         }
         $this->cHand = $newHand;
-        return $deck;
+        return $deck->deck;
     }
     /**
      * Method to handle the logic if computer has lots of cards of same value.
@@ -126,14 +126,13 @@ class Players
         }
         //$drawnCards = $deck->draw($toDraw);
         $this->cHand = $newHand;
-        return $deck;
+        return $deck->deck;
     }
     /**
      * Method to decide if the computer will raise bet.
      */
     public function bet($num)
     {
-        //need to somehow check their budgets...
         $this->pBet = $num;
         $rules = $this->rules;
         $difference = $this->pBet - $this->cBet;
@@ -142,7 +141,7 @@ class Players
             $this->cBet = $num + 50;
             $message = "raise";
         }
-        if ($difference <= 500) {
+        if ($difference >= 50) {
             $this->cBet = $num;
             $message = "call";
         }
@@ -150,11 +149,11 @@ class Players
         if ($difference > 500) {
             $message = "fold";
         }
-        if ($this->pBet > $this->pFunds) {
+        if ($this->pBet >= $this->pFunds) {
             $this->pBet = $this->pFunds;
             $message = "all in";
         }
-        if ($this->cBet > $this->cFunds) {
+        if ($this->cBet >= $this->cFunds) {
             $this->cBet = $this->cFunds;
             $message = "all in";
         }

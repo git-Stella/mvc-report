@@ -19,7 +19,21 @@ class RulesTest extends TestCase
     public function testCreateRules()
     {
         $rules = new Rules();
+        $dict = [
+            "Royal Flush",
+            "Straight Flush",
+            "Four of a Kind",
+            "Full House",
+            "Flush",
+            "Straight",
+            "Three of a Kind",
+            "Two Pair",
+            "One Pair",
+            "High Card"
+        ];
         $this->assertInstanceOf("\App\Poker\Rules", $rules);
+        $this->assertEquals($rules->dict, $dict);
+        $this->assertEquals($rules->points, 0);
     }
     /**Tests if royal flush works correctly */
     public function testRoyalFlush()
@@ -51,6 +65,9 @@ class RulesTest extends TestCase
         $this->assertTrue($rules->royalFlush($hand));
         $this->assertNotTrue($rules->royalFlush($handF));
     }
+    /**
+     * Test if straight flush works as it should.
+     */
     public function testStraightFlush()
     {
         $rules = new Rules();
@@ -77,6 +94,9 @@ class RulesTest extends TestCase
         $this->assertTrue($rules->straightFlush($hand));
         $this->assertNotTrue($rules->straightFlush($handF));
     }
+    /**
+     * Tests if the four of a kind function works.
+     */
     public function testFourOfAKind()
     {
         $rules = new Rules();
@@ -103,6 +123,9 @@ class RulesTest extends TestCase
         $this->assertTrue($rules->fourOfAKind($hand));
         $this->assertNotTrue($rules->fourOfAKind($handF));
     }
+    /**
+     * Tests if it checks for full house correctly.
+     */
     public function testFullHouse()
     {
         $rules = new Rules();
@@ -129,6 +152,9 @@ class RulesTest extends TestCase
         $this->assertTrue($rules->fullHouse($hand));
         $this->assertNotTrue($rules->fullHouse($handF));
     }
+    /**
+     * Tests if it checks for a flush correctly.
+     */
     public function testFlush()
     {
         $rules = new Rules();
@@ -155,6 +181,9 @@ class RulesTest extends TestCase
         $this->assertTrue($rules->flush($hand));
         $this->assertNotTrue($rules->flush($handF));
     }
+    /**
+     * Tests if it checks for a straight correctly.
+     */
     public function testStraight()
     {
         $rules = new Rules();
@@ -187,6 +216,9 @@ class RulesTest extends TestCase
         $this->assertNotTrue($rules->straight($handF));
         $this->assertTrue($rules->straight($handA));
     }
+    /**
+     * Tests if it checks for three of a kind correctly.
+     */
     public function testThreeOfAKind()
     {
         $rules = new Rules();
@@ -213,6 +245,9 @@ class RulesTest extends TestCase
         $this->assertTrue($rules->threeOfAKind($hand));
         $this->assertNotTrue($rules->threeOfAKind($handF));
     }
+    /**
+     * Tests if two of a pair is checked for correctly.
+     */
     public function testTwoPair()
     {
         $rules = new Rules();
@@ -239,6 +274,9 @@ class RulesTest extends TestCase
         $this->assertTrue($rules->twoPair($hand));
         $this->assertNotTrue($rules->twoPair($handF));
     }
+    /**
+     * Tests if one pair is checked for correctly.
+     */
     public function testOnePair()
     {
         $rules = new Rules();
@@ -265,6 +303,9 @@ class RulesTest extends TestCase
         $this->assertTrue($rules->onePair($hand));
         $this->assertNotTrue($rules->onePair($handF));
     }
+    /**
+     * Checks if high card is correctly found as true.
+     */
     public function testHighCard()
     {
         $rules = new Rules();
@@ -284,51 +325,4 @@ class RulesTest extends TestCase
         $this->assertTrue($res);
         $this->assertTrue($rules->highCard($hand));
     }
-    /*public function testPlacehold()
-    {
-        $rules = new Rules();
-        $card1 = new Card();
-        $card1->setValue(0, "diamonds");
-        $card2 = new Card();
-        $card2->setValue(0, "clubs");
-        $card3 = new Card();
-        $card3->setValue(0, "hearts");
-        $card4 = new Card();
-        $card4->setValue(0, "spades");
-        $card5 = new Card();
-        $card5->setValue(12, "spades");
-        $hand = [$card1, $card2, $card3, $card4, $card5];
-        $res = $rules->rulesWheel(2, $hand);
-        $this->assertTrue($res);
-        /*$res2 = $rules->rulesWheel(9, $hand);
-        $res3 = $rules->rulesWheel(1, $hand);
-        $this->assertNotTrue($res3);
-        $this->assertTrue($res2);
-        $this->assertTrue($res);
-    }*/
-    /*public function testSetValues()
-    {
-        $card = new Card();
-        $res = $card->setValue(1, "spades");
-        $this->assertEquals($res, "1 and spades");
-        $this->assertNotEmpty($card->value);
-        $this->assertNotEmpty($card->kingdom);
-        $this->assertNotEmpty($card->suit);
-        $this->assertNotEmpty($card->color);
-    }
-    public function testValFromKingdom()
-    {
-        $card = new Card();
-        $res = $card->valFromKingdom("jack", "spades");
-        $this->assertEquals($res, "10 and spades");
-    }
-    public function testGetFunctions()
-    {
-        $card = new Card();
-        $card->setValue(0, "spades");
-        $this->assertEquals($card->getValue(), 0);
-        $this->assertEquals($card->getSuit(), "spades");
-        $this->assertEquals($card->getColor(), "♠️");
-        $this->assertEquals($card->getKingdom(), "A");
-    }*/
 }
