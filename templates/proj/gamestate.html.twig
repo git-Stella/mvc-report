@@ -6,33 +6,66 @@
 <h1>Poker</h1>
 
 <p>5 card poker</p>
+
 {{ include('flash.html.twig') }}
 
 {% if time == 0 %}
+    <p>Deck: {{ deck }}</p>
+    <p>{{ username }} Funds left: {{ funds }}</p>
+    <p>{{ username }} Bet: {{ called }}</p>
+    <p> Opponent Bet: {{ computerpot }}</p>
     <h1>Raise?</h1>
     <form action="{{ path('projround') }}" method="POST">
         <input type="hidden" id="stage" name="stage" value={{ time }}>
         <label for="num">Bet?</label>
-        <input type="number" id="num" name="num" min={{ score }}>
-        <button type="submit" value="Val">Call</button>
+        <input type="number" id="num" name="num" min="{{ playerpot }}" value="{{ playerpot }}" required>
+        <button type="submit" value="Val">Call/Raise/All in</button>
     </form>
+    <form action="{{ path('projloss') }}" method="POST">
+        <input type="hidden" id="stage" name="stage" value={{ time }}>
+        <button type="submit" value="Val">Fold</button>
+    </form>
+    <h2>My hand</h2>
+    <p>
+        {% for i in range(0, playerHand|length-1) %}
+            {{ playerHand[i] }}
+        {% endfor %}
+    </p>
 {% endif %}
 {% if time == 1 %}
+    <p>Deck: {{ deck }}</p>
+    <p>{{ username }} Funds left: {{ funds }}</p>
+    <p>{{ username }} Bet: {{ called }}</p>
+    <p> Opponent Bet: {{ computerpot }}</p>
+    <h1>Throw cards or keep?</h1>
     <form action="{{ path('projdraw') }}" method="POST">
         <input type="hidden" id="stage" name="stage" value={{ time }}>
-        <label for="draw">Draw?</label>
-        <input type="number" id="draw" name="draw" min=0 max=3>
-        <button type="submit" value="Val">Draw</button>
+        {% for i in range(0, playerHand|length-1) %}
+            <input type="checkbox" id="card{{ i }}" name="card{{ i }}" value="card{{ i }}">
+            <label for="card{{ i }}">{{ playerHand[i] }}</label><br>
+        {% endfor %}
+        <button type="submit" value="Val">Discard selected</button>
+    </form>
+    <form action="{{ path('projloss') }}" method="POST">
+        <input type="hidden" id="stage" name="stage" value={{ time }}>
+        <button type="submit" value="Val">Fold</button>
     </form>
 {% endif %}
 {% if time == 2 %}
-    <p>Hej</p>
+    <h1>Username:</h1>
+    <form action="{{ path('projstart') }}" method="POST">
+        <input type="hidden" id="stage" name="stage" value={{ time }}>
+        <input type="text" id="name" name="name" required>
+        <button type="submit" value="Val">Submit</button>
+    </form>
 {% endif %}
-<h2>My hand</h2>
-<p>
-    {% for i in range(0, playerHand|length-1) %}
-        {{ playerHand[i] }}
-    {% endfor %}
-</p>
+{% if time == 3 %}
+    <h1>Result:</h1>
+    <p>Hey</p>
+    <form action="{{ path('projrestart') }}" method="POST">
+        <input type="hidden" id="stage" name="stage" value={{ time }}>
+        <button type="submit" value="Val">New round</button>
+    </form>
+{% endif %}
 
 {% endblock %}

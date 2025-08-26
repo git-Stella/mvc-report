@@ -93,7 +93,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\DeckOfCards\u003A\u003Aremove\u0028\u0029",
             "name": "remove",
-            "summary": "Method\u0020to\u0020remove\u0020a\u0020card\u0020from\u0020deck.",
+            "summary": "Method\u0020to\u0020remove\u0020a\u0020card\u0020from\u0020deck\u0020based\u0020on\u0020string.",
             "url": "classes/App-Card-DeckOfCards.html#method_remove"
         },                {
             "fqsen": "\\App\\Card\\DeckOfCards\u003A\u003AgetNumberCards\u0028\u0029",
@@ -481,6 +481,71 @@ Search.appendIndex(
             "summary": "Route\u0020to\u0020show\u0020product\u0020which\u0020has\u0020at\u0020least\u0020the\u0020value\u0020searched\u0020for.",
             "url": "classes/App-Controller-ProductController.html#method_showProductByMinimumValue"
         },                {
+            "fqsen": "\\App\\Controller\\ProjectController",
+            "name": "ProjectController",
+            "summary": "Controller\u0020class\u0020for\u0020standard\u0020twig\u0020using\u0020routes.",
+            "url": "classes/App-Controller-ProjectController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AprojHome\u0028\u0029",
+            "name": "projHome",
+            "summary": "Home\u0020page.",
+            "url": "classes/App-Controller-ProjectController.html#method_projHome"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AprojAbout\u0028\u0029",
+            "name": "projAbout",
+            "summary": "About\u0020page.",
+            "url": "classes/App-Controller-ProjectController.html#method_projAbout"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AprojTest\u0028\u0029",
+            "name": "projTest",
+            "summary": "Test\u0020page.",
+            "url": "classes/App-Controller-ProjectController.html#method_projTest"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AprojReset\u0028\u0029",
+            "name": "projReset",
+            "summary": "Route\u0020to\u0020reset\u0020session.",
+            "url": "classes/App-Controller-ProjectController.html#method_projReset"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AprojGamestate\u0028\u0029",
+            "name": "projGamestate",
+            "summary": "Route\u0020for\u0020the\u0020basic\u0020gamestate.",
+            "url": "classes/App-Controller-ProjectController.html#method_projGamestate"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AprojRound\u0028\u0029",
+            "name": "projRound",
+            "summary": "Route\u0020for\u0020raising\u0020bets.",
+            "url": "classes/App-Controller-ProjectController.html#method_projRound"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AprojDraw\u0028\u0029",
+            "name": "projDraw",
+            "summary": "Route\u0020to\u0020draw\u0020cards.",
+            "url": "classes/App-Controller-ProjectController.html#method_projDraw"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AprojStarter\u0028\u0029",
+            "name": "projStarter",
+            "summary": "Route\u0020to\u0020register\u0020username.",
+            "url": "classes/App-Controller-ProjectController.html#method_projStarter"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AprojClash\u0028\u0029",
+            "name": "projClash",
+            "summary": "Route\u0020for\u0020tallying\u0020up\u0020the\u0020loss\/gains\u0020and\u0020seeing\u0020who\u0020won.",
+            "url": "classes/App-Controller-ProjectController.html#method_projClash"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AprojRe\u0028\u0029",
+            "name": "projRe",
+            "summary": "Route\u0020to\u0020start\u0020new\u0020round.",
+            "url": "classes/App-Controller-ProjectController.html#method_projRe"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AprojEz\u0028\u0029",
+            "name": "projEz",
+            "summary": "Route\u0020for\u0020if\u0020the\u0020computer\u0020folds.",
+            "url": "classes/App-Controller-ProjectController.html#method_projEz"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AprojGitGud\u0028\u0029",
+            "name": "projGitGud",
+            "summary": "Route\u0020for\u0020if\u0020the\u0020player\u0020folds.",
+            "url": "classes/App-Controller-ProjectController.html#method_projGitGud"
+        },                {
             "fqsen": "\\App\\Dice\\Dice",
             "name": "Dice",
             "summary": "",
@@ -756,6 +821,181 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Kernel.html"
         },                {
+            "fqsen": "\\App\\Poker\\Players",
+            "name": "Players",
+            "summary": "Class\u0020representing\u0020poker\u0020players.",
+            "url": "classes/App-Poker-Players.html"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor\u0020method",
+            "url": "classes/App-Poker-Players.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003AhandLogic\u0028\u0029",
+            "name": "handLogic",
+            "summary": "Method\u0020to\u0020figure\u0020out\u0020what\u0020cards\u0020to\u0020drop",
+            "url": "classes/App-Poker-Players.html#method_handLogic"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003AsuitLogic\u0028\u0029",
+            "name": "suitLogic",
+            "summary": "Method\u0020to\u0020handle\u0020the\u0020logic\u0020if\u0020computer\u0020has\u0020lots\u0020of\u0020cards\u0020of\u0020the\u0020same\u0020suit.",
+            "url": "classes/App-Poker-Players.html#method_suitLogic"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003AvalLogic\u0028\u0029",
+            "name": "valLogic",
+            "summary": "Method\u0020to\u0020handle\u0020the\u0020logic\u0020if\u0020computer\u0020has\u0020lots\u0020of\u0020cards\u0020of\u0020same\u0020value.",
+            "url": "classes/App-Poker-Players.html#method_valLogic"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003Abet\u0028\u0029",
+            "name": "bet",
+            "summary": "Method\u0020to\u0020decide\u0020if\u0020the\u0020computer\u0020will\u0020raise\u0020bet.",
+            "url": "classes/App-Poker-Players.html#method_bet"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003Ascore\u0028\u0029",
+            "name": "score",
+            "summary": "Method\u0020to\u0020determine\u0020the\u0020winner\u0020of\u0020a\u0020round,\u0020used\u0020inside\u0020clash.",
+            "url": "classes/App-Poker-Players.html#method_score"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003Aclash\u0028\u0029",
+            "name": "clash",
+            "summary": "Method\u0020to\u0020decide\u0020who\u0020wins.",
+            "url": "classes/App-Poker-Players.html#method_clash"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003AresolveEqual\u0028\u0029",
+            "name": "resolveEqual",
+            "summary": "Method\u0020to\u0020resolve\u0020same\u0020hands.",
+            "url": "classes/App-Poker-Players.html#method_resolveEqual"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003A\u0024playerScore",
+            "name": "playerScore",
+            "summary": "",
+            "url": "classes/App-Poker-Players.html#property_playerScore"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003A\u0024computerScore",
+            "name": "computerScore",
+            "summary": "",
+            "url": "classes/App-Poker-Players.html#property_computerScore"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003A\u0024pHand",
+            "name": "pHand",
+            "summary": "",
+            "url": "classes/App-Poker-Players.html#property_pHand"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003A\u0024cHand",
+            "name": "cHand",
+            "summary": "",
+            "url": "classes/App-Poker-Players.html#property_cHand"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003A\u0024pBet",
+            "name": "pBet",
+            "summary": "",
+            "url": "classes/App-Poker-Players.html#property_pBet"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003A\u0024cBet",
+            "name": "cBet",
+            "summary": "",
+            "url": "classes/App-Poker-Players.html#property_cBet"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003A\u0024pFunds",
+            "name": "pFunds",
+            "summary": "",
+            "url": "classes/App-Poker-Players.html#property_pFunds"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003A\u0024cFunds",
+            "name": "cFunds",
+            "summary": "",
+            "url": "classes/App-Poker-Players.html#property_cFunds"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003A\u0024round",
+            "name": "round",
+            "summary": "",
+            "url": "classes/App-Poker-Players.html#property_round"
+        },                {
+            "fqsen": "\\App\\Poker\\Players\u003A\u003A\u0024rules",
+            "name": "rules",
+            "summary": "",
+            "url": "classes/App-Poker-Players.html#property_rules"
+        },                {
+            "fqsen": "\\App\\Poker\\Rules",
+            "name": "Rules",
+            "summary": "Class\u0020representing\u0020poker\u0020rules.",
+            "url": "classes/App-Poker-Rules.html"
+        },                {
+            "fqsen": "\\App\\Poker\\Rules\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor\u0020method",
+            "url": "classes/App-Poker-Rules.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Poker\\Rules\u003A\u003AhandPoints\u0028\u0029",
+            "name": "handPoints",
+            "summary": "Method\u0020to\u0020return\u0020which\u0020rule\u0020hand\u0020matches.",
+            "url": "classes/App-Poker-Rules.html#method_handPoints"
+        },                {
+            "fqsen": "\\App\\Poker\\Rules\u003A\u003ArulesWheel\u0028\u0029",
+            "name": "rulesWheel",
+            "summary": "Method\u0020to\u0020decide\u0020which\u0020points\u0020method\u0020to\u0020use.",
+            "url": "classes/App-Poker-Rules.html#method_rulesWheel"
+        },                {
+            "fqsen": "\\App\\Poker\\Rules\u003A\u003AroyalFlush\u0028\u0029",
+            "name": "royalFlush",
+            "summary": "Method\u0020to\u0020check\u0020if\u0020hand\u0020is\u0020a\u0020royal\u0020flush.",
+            "url": "classes/App-Poker-Rules.html#method_royalFlush"
+        },                {
+            "fqsen": "\\App\\Poker\\Rules\u003A\u003AstraightFlush\u0028\u0029",
+            "name": "straightFlush",
+            "summary": "Method\u0020to\u0020check\u0020if\u0020hand\u0020is\u0020a\u0020straight\u0020flush.",
+            "url": "classes/App-Poker-Rules.html#method_straightFlush"
+        },                {
+            "fqsen": "\\App\\Poker\\Rules\u003A\u003AfourOfAKind\u0028\u0029",
+            "name": "fourOfAKind",
+            "summary": "Method\u0020to\u0020check\u0020if\u0020hand\u0020is\u0020four\u0020of\u0020a\u0020kind.",
+            "url": "classes/App-Poker-Rules.html#method_fourOfAKind"
+        },                {
+            "fqsen": "\\App\\Poker\\Rules\u003A\u003AfullHouse\u0028\u0029",
+            "name": "fullHouse",
+            "summary": "Method\u0020to\u0020check\u0020if\u0020hand\u0020is\u0020full\u0020house.",
+            "url": "classes/App-Poker-Rules.html#method_fullHouse"
+        },                {
+            "fqsen": "\\App\\Poker\\Rules\u003A\u003Aflush\u0028\u0029",
+            "name": "flush",
+            "summary": "Method\u0020to\u0020check\u0020if\u0020hand\u0020is\u0020a\u0020flush.",
+            "url": "classes/App-Poker-Rules.html#method_flush"
+        },                {
+            "fqsen": "\\App\\Poker\\Rules\u003A\u003Astraight\u0028\u0029",
+            "name": "straight",
+            "summary": "Method\u0020to\u0020check\u0020if\u0020hand\u0020is\u0020a\u0020straight.",
+            "url": "classes/App-Poker-Rules.html#method_straight"
+        },                {
+            "fqsen": "\\App\\Poker\\Rules\u003A\u003AthreeOfAKind\u0028\u0029",
+            "name": "threeOfAKind",
+            "summary": "Method\u0020to\u0020check\u0020if\u0020hand\u0020is\u0020three\u0020of\u0020a\u0020kind.",
+            "url": "classes/App-Poker-Rules.html#method_threeOfAKind"
+        },                {
+            "fqsen": "\\App\\Poker\\Rules\u003A\u003AtwoPair\u0028\u0029",
+            "name": "twoPair",
+            "summary": "Method\u0020to\u0020check\u0020if\u0020hand\u0020is\u0020two\u0020pair.",
+            "url": "classes/App-Poker-Rules.html#method_twoPair"
+        },                {
+            "fqsen": "\\App\\Poker\\Rules\u003A\u003AonePair\u0028\u0029",
+            "name": "onePair",
+            "summary": "Method\u0020to\u0020check\u0020if\u0020hand\u0020is\u0020a\u0020one\u0020pair.",
+            "url": "classes/App-Poker-Rules.html#method_onePair"
+        },                {
+            "fqsen": "\\App\\Poker\\Rules\u003A\u003AhighCard\u0028\u0029",
+            "name": "highCard",
+            "summary": "Method\u0020to\u0020use\u0020if\u0020the\u0020other\u0020hands\u0020are\u0020not\u0020met.",
+            "url": "classes/App-Poker-Rules.html#method_highCard"
+        },                {
+            "fqsen": "\\App\\Poker\\Rules\u003A\u003A\u0024dict",
+            "name": "dict",
+            "summary": "",
+            "url": "classes/App-Poker-Rules.html#property_dict"
+        },                {
+            "fqsen": "\\App\\Poker\\Rules\u003A\u003A\u0024points",
+            "name": "points",
+            "summary": "",
+            "url": "classes/App-Poker-Rules.html#property_points"
+        },                {
             "fqsen": "\\App\\Repository\\LibraryRepository",
             "name": "LibraryRepository",
             "summary": "",
@@ -830,6 +1070,11 @@ Search.appendIndex(
             "name": "App",
             "summary": "",
             "url": "namespaces/app.html"
+        },                {
+            "fqsen": "\\App\\Poker",
+            "name": "Poker",
+            "summary": "",
+            "url": "namespaces/app-poker.html"
         },                {
             "fqsen": "\\App\\Repository",
             "name": "Repository",
