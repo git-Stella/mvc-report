@@ -46,7 +46,7 @@ container {
 
 .blackred {
     color: white;
-    background: linear-gradient(to bottom, black, red);
+    background: linear-gradient(to bottom, maroon, red);
 }
 
 .two-col-layout {

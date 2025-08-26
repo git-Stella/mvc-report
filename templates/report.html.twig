@@ -148,6 +148,42 @@
     <h2>Vilken är din TIL för detta kmom?</h2>
     <p>Jag har lärt mig mycket mer om hur man navigerar information i scrutinizer och de html sidorna vi generade för phpmetrics. Vilket var något av det som fick denna uppgiften att ta väldigt lång tid för mig. 
     Det kändes ganska ovant för mig men jag tror att det är värdefullt att kunna.</p>
+    
     <h1 id="kmom10">Kmom10</h1>
+    <h2>Innehåll</h2>
+    <p>Min lösning är nog inte den mest eleganta. Jag har gjort två nya klasser, players och rules. Annars återanvänder jag min DeckOfCards och Cards klasser. 
+    Rules kollar en array av cards (så en hand) för att se vilken pokerhand den matchar och beräknar det. En funktion som kollar varje hand och en större funktion som returnerar vilken av dem handen matchar, 
+    räknar ner från den handen som är värt mest så den alltid tar den som man skulle vilja använda. Players har funktioner för att se va datorn gör beroende på spelarens input. 
+    Till exempel bet metoden så skickas det in vad spelarens satsning är nu, då väljer datorn baserat på hur stor skillnad satsningen är om den vill satsa samma, mer eller ge upp. 
+    Denna funktionen hade kunnat göras mer avancerad om jag hade vad för kort datorn har på hand påverka också men jag valde att hålla det simpelt. 
+    Utöver det så har jag händer (arrayer av kort) för båda spelarna. Det finns även en funktion för datorn att avgöra om den bör försöka få par/fyrtal/tretal eller om den bör sikta på 
+    stege och sedan slänga kort i enlighet med det. Utöver dessa klasser så använder jag mig bara av sessioner för att hålla koll på exakt hur mycket spelaren har för pengar och att se till att 
+    klasserna får rätt nuvarande i vad de har i händerna, vilka kort finns kvar i leken och så vidare. </p>
+
+    <h2>Utseende</h2>
+    <p>Denna delen var ganska simpel att komma fram till. Jag bestämde mig tidigt att jag ville ha casino tema, så jag höll mig till färger som 
+    kändes rätt för det. Jag höll mig ganska säker och gjorde inte enorma ändringar på strukturen av hur sidan är uppbyggd visuellt. Men den väldigt annorlunda 
+    färgvalen ger en väldigt annorlunda känsla. Framförallt tyckte jag det var viktigt att "spelbordet" var grönt med vit text då det känns väldigt casino tema.</p>
+
+    <h2>Dokumentation</h2>
+    <p>Jag uppnår inte riktigt 90% kodtäckning på mina nya klasser. Utan är runt 85% kodtäckning. Detta är till viss del för att jag inte testade delar av koden som 
+    fungerar på samma sätt som andra delar jag testade, främst inom "players" klassen hur den hanterar att båda spelarna har samma hand. Detta får den att räkna den mest komplicerade metoden, 
+    resolveEqual, inte riktigt täcks av enhetstesterna. Dokumentation finns dock för alla funktioner och klasser. Det största problemet med detta är hur 
+    mycket mer komplext och dåligt maintainability index mitt projekt har nu på grund av hur överkomplicerad programmeringen i min players klass är.</p>
+
+    <h2>Allmänt</h2>
+    <p>Jag hade en ganska tydlig idé om hur jag ville göra med projektet, men eftersom jag hade spenderat en lång tid då jag inte hade tillgång att jobba 
+    på det så blev det problem att komma ihåg exakt hur allting fungerade. Så jag hade mycket problem med att försöka lära mig igen hur jag ska göra och 
+    många av mina funktioner blev onödigt komplicerade då jag försökte göra allt på enklare sätt jag kom ihåg fungerade eller kunde hitta dokumentation för lätt. 
+    Det tog mig på grund av detta mycket lång tid att avsluta projektet, men det har inte varit så super svårt. Har haft en ganska tydlig idé genom nästan hela projektet 
+    hur jag vill bygga upp det i överlag. Svårt att säga om projektet var rimligt då jag inte hade tid att börja på det föränn efter kursen och därmed var i en sämmre 
+    position att få det gjort. </p>
+
+    <h2>Tankar om kursen</h2>
+    <p>Kursen i sig har varit ok. Men jag anser att den, som allt annat på BTH, går för fort och att det finns inget utrymme för att misslyckas med någonting. 
+    Kan man inte allting som man pluggar sedan innan är BTH ett väldigt dåligt val att ansöka sig till även om olika kurser är i ett vakuum helt ok. Så jag skulle nog aldrig 
+    rekommendera någon kurs från BTH till någon alls om de inte redan kan allting som den kursen kommer att täcka, de kommer inte ha nog med tid annars för att göra allting. 
+    Handledningarna har varit bra och jag har hängt med bra på dem. Det som vi går igenom har varit intressant också, jag känner bara att jag har omöjligt att komma ihåg 
+    så mycket med hur fort allting rör sig med kurserna på bth. </p>
     
 {% endblock %}
